@@ -5,11 +5,17 @@ VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grupp3Auktionsajt.Api", "Grupp3Auktionsajt.Api\Grupp3Auktionsajt.Api.csproj", "{352AE5E5-F419-4515-8E7C-4368352498D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grupp3Auktionsajt.Core", "Grupp3Auktionsajt.Core\Grupp3Auktionsajt.Core.csproj", "{32AAD396-0025-40DB-81AE-C1185CF77A0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grupp3Auktionsajt.Core", "Grupp3Auktionsajt.Core\Grupp3Auktionsajt.Core.csproj", "{32AAD396-0025-40DB-81AE-C1185CF77A0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grupp3Auktionsajt.Data", "Grupp3Auktionsajt.Data\Grupp3Auktionsajt.Data.csproj", "{B7D3FA83-BB3F-4FDB-BCC1-273841E7CA9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grupp3Auktionsajt.Data", "Grupp3Auktionsajt.Data\Grupp3Auktionsajt.Data.csproj", "{B7D3FA83-BB3F-4FDB-BCC1-273841E7CA9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grupp3Auktionsajt.Domain", "Grupp3Auktionsajt.Domain\Grupp3Auktionsajt.Domain.csproj", "{C0D716A8-B3A6-4F6A-9E99-27E1396DA229}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grupp3Auktionsajt.Domain", "Grupp3Auktionsajt.Domain\Grupp3Auktionsajt.Domain.csproj", "{C0D716A8-B3A6-4F6A-9E99-27E1396DA229}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{32FDD4EC-79EF-4B58-A0B2-DC3DC076033D}"
+	ProjectSection(SolutionItems) = preProject
+		Skapa alla stored procedures.sql = Skapa alla stored procedures.sql
+		skapa tabeller.sql = skapa tabeller.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
