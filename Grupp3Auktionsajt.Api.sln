@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grupp3Auktionsajt.Api", "Grupp3Auktionsajt.Api\Grupp3Auktionsajt.Api.csproj", "{352AE5E5-F419-4515-8E7C-4368352498D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grupp3Auktionsajt.Api", "Grupp3Auktionsajt.Api\Grupp3Auktionsajt.Api.csproj", "{352AE5E5-F419-4515-8E7C-4368352498D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grupp3Auktionsajt.Core", "Grupp3Auktionsajt.Core\Grupp3Auktionsajt.Core.csproj", "{32AAD396-0025-40DB-81AE-C1185CF77A0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grupp3Auktionsajt.Data", "Grupp3Auktionsajt.Data\Grupp3Auktionsajt.Data.csproj", "{B7D3FA83-BB3F-4FDB-BCC1-273841E7CA9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grupp3Auktionsajt.Domain", "Grupp3Auktionsajt.Domain\Grupp3Auktionsajt.Domain.csproj", "{C0D716A8-B3A6-4F6A-9E99-27E1396DA229}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{352AE5E5-F419-4515-8E7C-4368352498D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{352AE5E5-F419-4515-8E7C-4368352498D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{352AE5E5-F419-4515-8E7C-4368352498D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32AAD396-0025-40DB-81AE-C1185CF77A0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32AAD396-0025-40DB-81AE-C1185CF77A0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32AAD396-0025-40DB-81AE-C1185CF77A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32AAD396-0025-40DB-81AE-C1185CF77A0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7D3FA83-BB3F-4FDB-BCC1-273841E7CA9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7D3FA83-BB3F-4FDB-BCC1-273841E7CA9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7D3FA83-BB3F-4FDB-BCC1-273841E7CA9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7D3FA83-BB3F-4FDB-BCC1-273841E7CA9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0D716A8-B3A6-4F6A-9E99-27E1396DA229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0D716A8-B3A6-4F6A-9E99-27E1396DA229}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0D716A8-B3A6-4F6A-9E99-27E1396DA229}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0D716A8-B3A6-4F6A-9E99-27E1396DA229}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
