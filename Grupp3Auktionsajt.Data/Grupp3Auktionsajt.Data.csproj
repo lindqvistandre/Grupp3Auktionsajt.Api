@@ -18,4 +18,8 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Grupp3Auktionsajt.Domain\Grupp3Auktionsajt.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
