@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="Dapper" Version="2.1.28" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
@@ -21,6 +17,10 @@
     <ProjectReference Include="..\Grupp3Auktionsajt.Core\Grupp3Auktionsajt.Core.csproj" />
     <ProjectReference Include="..\Grupp3Auktionsajt.Data\Grupp3Auktionsajt.Data.csproj" />
     <ProjectReference Include="..\Grupp3Auktionsajt.Domain\Grupp3Auktionsajt.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
