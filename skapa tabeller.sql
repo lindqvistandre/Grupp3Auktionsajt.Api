@@ -24,3 +24,5 @@ create table Bids (
 	BidTimeStamp datetime not null default getdate() -- Later when creating stored procedures, you won't need to specify the BidTimeStamp since it will now on default be "getdate()"
 );
 go
+
+-- klar!
