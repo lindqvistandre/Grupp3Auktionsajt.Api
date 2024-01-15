@@ -11,10 +11,13 @@ namespace Grupp3Auktionsajt.Api.Controllers
     {
         private readonly IAuctionService _service;
         private readonly IMapper _mapper;
+        private readonly ILogger<AuctionController> _logger;
 
         public AuctionController(IAuctionService service)
         {
             _service = service;
         }
+
+
     }
 }
