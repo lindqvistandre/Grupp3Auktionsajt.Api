@@ -9,13 +9,14 @@ using Grupp3Auktionsajt.Data.Repos;
 using Grupp3Auktionsajt.Domain.Models.DTO;
 using.Grupp3Auktionsajt.Domain.Models.Entities;
 using Grupp3Auktionsajt.Domain.Models.Profiles;
+using Microsoft.AspNetCore.SignalR;
 
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseUrls("http://localhost:5265");
 
 builder.Services.AddControllers();
-builder.Services.AddSingleton<IInlämningsuppgift3Context, Inlämningsuppgift3Context>();
+builder.Services.AddSingleton<IDBContext, DBContext>();
 
 
 // Authentication
