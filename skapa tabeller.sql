@@ -62,3 +62,19 @@ VALUES
 ('2', '2', '5', '170', '2023-01-13 15:16:50'),
 ('3', '2', '6', '180', '2023-01-14 15:16:50'),
 ('4', '2', '7', '190', '2023-01-15 15:17:50');
+
+-- Föregående kod om det finns...
+GO
+
+CREATE PROCEDURE UserLogin
+    @Username NVARCHAR(50),
+    @Password NVARCHAR(50)
+AS
+BEGIN
+    SELECT UserId
+    FROM Users
+    WHERE Username = @Username AND Password = @Password
+END
+GO
+
+-- Eventuell efterföljande kod...
