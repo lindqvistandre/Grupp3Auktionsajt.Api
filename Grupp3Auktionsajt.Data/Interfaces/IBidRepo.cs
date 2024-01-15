@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Grupp3Auktionsajt.Data.Interfaces
 {
-    public interface IAuctionRepo
+    public interface IBidRepo
     {
-        void DeleteAuction(int auctionID);
+        void DeleteBid(int bidID);
     }
 }
