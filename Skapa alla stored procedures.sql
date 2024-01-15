@@ -120,28 +120,3 @@ END
 END;
 
 
--------- GetBids ------
-CREATE PROCEDURE GetBidsForAuction
-    @AuctionId INT
-AS
-BEGIN
--- Kontrollera om auktionen är öppen eller stängd
-DECLARE @IsOpen BIT;
-SELECT @IsOpen = IsOpen FROM Auctions WHERE AuctionId = @AuctionId;
-IF @IsOpen = 1
-BEGIN
-    -- Om auktionen är öppen, visa alla bud
-    SELECT b.BidId, b.UserId, b.BidPrice, b.BidTimeStamp 
-    FROM Bids b 
-    WHERE b.AuctionId = @AuctionId
-    ORDER BY b.BidPrice DESC;
-END
-ELSE
-BEGIN
-    -- Om auktionen är stängd, visa endast det högsta budet
-    SELECT TOP 1 b.BidId, b.UserId, b.BidPrice, b.BidTimeStamp 
-    FROM Bids b 
-    WHERE b.AuctionId = @AuctionId
-    ORDER BY b.BidPrice DESC;
-END
-END;
