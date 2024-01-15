@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Grupp3Auktionsajt.Domain\Grupp3Auktionsajt.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
