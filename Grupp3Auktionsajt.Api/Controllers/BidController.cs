@@ -5,27 +5,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Grupp3Auktionsajt.Api.Controllers
 {
-    [Route("api/auction")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class AuctionController : ControllerBase
+    public class BidController : ControllerBase
     {
+
         private readonly IAuctionService _service;
         private readonly IMapper _mapper;
-        private readonly ILogger<AuctionController> _logger;
+        private readonly ILogger<BidController> _logger;
 
-        public AuctionController(IAuctionService service, IMapper mapper, ILogger<AuctionController> logger)
+        public BidController(IAuctionService service, IMapper mapper, ILogger<BidController> logger)
         {
             _service = service;
             _mapper = mapper;
             _logger = logger;
         }
 
-        [HttpPost("{auctionId}")]
-
-        public IActionResult DeleteAuction(int auctionId) 
+        [HttpPost("{bidId}")] 
+        public IActionResult DeleteBid(int  bidId)
         {
+
             return Ok();
-            
-        }     
+
+        }
     }
 }
