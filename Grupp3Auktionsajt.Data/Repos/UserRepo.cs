@@ -8,5 +8,6 @@ namespace Grupp3Auktionsajt.Data.Repos
 {
     internal class UserRepo
     {
+
     }
 }

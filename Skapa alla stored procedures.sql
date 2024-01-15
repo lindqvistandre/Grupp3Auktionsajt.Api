@@ -120,3 +120,13 @@ END
 END;
 
 
+CREATE PROCEDURE UserLogin
+    @Username NVARCHAR(50),
+    @Password NVARCHAR(50)
+AS
+BEGIN
+    SELECT UserId
+    FROM Users
+    WHERE Username = @Username AND Password = @Password
+END
+GO
