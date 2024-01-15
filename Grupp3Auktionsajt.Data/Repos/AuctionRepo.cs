@@ -22,18 +22,6 @@ namespace Grupp3Auktionsajt.Data.Repos
         }
        
 
-        public void DeleteBid(int bidID)
-        {
-            using (var db = _context.GetConnection())
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@BidID", bidID);
-
-                db.Execute("DeleteBid", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
-
-
         public void DeleteAuction(int auctionID)
         {
             using (var db = _context.GetConnection())
