@@ -23,7 +23,7 @@ namespace Grupp3Auktionsajt.Data.Repos
 
         public static void DeleteBid(int bidID)
         {
-            using (IDbConnection db = new SqlConnection(_context))
+            using (var db = _context.GetConnection())
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@BidID", bidID);
@@ -33,9 +33,9 @@ namespace Grupp3Auktionsajt.Data.Repos
         }
 
 
-        public static void DeleteAuction(int auctionID, DBContext _context)
+        public static void DeleteAuction(int auctionID)
         {
-            using (IDbConnection db = new SqlConnection(_context))
+            using (var db = _context.GetConnection())
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@AuctionID", auctionID);
