@@ -7,9 +7,10 @@ using Grupp3Auktionsajt.Data;
 using Grupp3Auktionsajt.Data.Interfaces;
 using Grupp3Auktionsajt.Data.Repos;
 using Grupp3Auktionsajt.Domain.Models.DTO;
-using.Grupp3Auktionsajt.Domain.Models.Entities;
+using Grupp3Auktionsajt.Domain.Models.Entities;
 using Grupp3Auktionsajt.Domain.Models.Profiles;
 using Microsoft.AspNetCore.SignalR;
+using AutoMapper;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,7 +41,7 @@ builder.Services.AddAuthentication(opt =>
 });
 
 // Automapper
-builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(Uppgift_3_ver_4.Domain.Models.Profiles).Assembly);
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
 var app = builder.Build();
