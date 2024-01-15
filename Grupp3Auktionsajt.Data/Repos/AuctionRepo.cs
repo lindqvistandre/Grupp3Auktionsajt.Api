@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Grupp3Auktionsajt.Data.Interfaces;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Grupp3Auktionsajt.Data.Repos
 {
-    public class AuctionRepo
+    public class AuctionRepo : IAuctionRepo
     {
 
         private readonly DBContext _context;
@@ -21,7 +22,7 @@ namespace Grupp3Auktionsajt.Data.Repos
         }
        
 
-        public static void DeleteBid(int bidID)
+        public void DeleteBid(int bidID)
         {
             using (var db = _context.GetConnection())
             {
@@ -33,7 +34,7 @@ namespace Grupp3Auktionsajt.Data.Repos
         }
 
 
-        public static void DeleteAuction(int auctionID)
+        public void DeleteAuction(int auctionID)
         {
             using (var db = _context.GetConnection())
             {

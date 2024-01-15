@@ -18,6 +18,7 @@ builder.WebHost.UseUrls("http://localhost:5265");
 
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IDBContext, DBContext>();
+builder.Services.AddScoped<IAuctionRepo, AuctionRepo>();
 
 
 // Authentication
