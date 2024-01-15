@@ -13,4 +13,13 @@ namespace Grupp3Auktionsajt.Core.Services
     {
         private readonly IAuctionRepo _repo;
 
+        public AuctionService(IAuctionRepo repo)
+        {
+            _repo = repo;
+        }
+
+        public void DeleteAuction(int auctionID)
+        {
+            _repo.DeleteAuction(auctionID);
+        }
     }

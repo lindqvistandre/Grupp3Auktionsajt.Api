@@ -8,6 +8,6 @@ namespace Grupp3Auktionsajt.Core.Interfaces
 {
     public interface IAuctionService
     {
-
+        void DeleteAuction(int auctionID);
     }
 }
