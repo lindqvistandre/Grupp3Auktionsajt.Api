@@ -17,3 +17,45 @@ From Auctions
 Where AuctionID = @DeleteByID
 End
 
+
+-- stored procedure för bid -- 
+CREATE PROCEDURE CreateBid
+    @AuctionId INT,
+    @UserId INT,
+    @BidPrice DECIMAL(18, 2)
+AS
+BEGIN
+    -- Kontrollera om auktionen är öppen med en BOOL
+    DECLARE @IsOpen BIT;
+    SELECT @IsOpen = IsOpen FROM Auctions WHERE AuctionId = @AuctionId;
+
+    IF @IsOpen = 0
+    BEGIN
+        RAISERROR ('Auktionen är inte öppen för bud.', 16, 1);
+        RETURN;
+    END
+
+    -- Kontrollerar att användaren inte är skaparen av auktionen
+    DECLARE @CreatorId INT;
+    SELECT @CreatorId = UserId FROM Auctions WHERE AuctionId = @AuctionId;
+
+    IF @UserId = @CreatorId
+    BEGIN
+        RAISERROR ('Du kan inte lägga bud på din egen auktion.', 16, 1);
+        RETURN;
+    END
+
+    -- Kontrollera att budet är högre än det nuvarande högsta budet
+    DECLARE @HighestBid DECIMAL(18, 2);
+    SELECT @HighestBid = ISNULL(MAX(BidPrice), 0) FROM Bids WHERE AuctionId = @AuctionId;
+
+    IF @BidPrice <= @HighestBid
+    BEGIN
+        RAISERROR ('Budet är för lågt.', 16, 1);
+        RETURN;
+    END
+
+    -- Skapar budet
+    INSERT INTO Bids (AuctionId, UserId, BidPrice)
+    VALUES (@AuctionId, @UserId, @BidPrice);
+END;
