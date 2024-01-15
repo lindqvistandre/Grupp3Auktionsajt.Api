@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Grupp3Auktionsajt.Domain.Models.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,6 @@ namespace Grupp3Auktionsajt.Core.Interfaces
     public interface IAuctionService
     {
         void DeleteAuction(int auctionID);
+        void CreateAuction(CreateAuctionDTO auctionDTO, int UserId);
     }
 }

@@ -30,7 +30,7 @@ namespace Grupp3Auktionsajt.Data.Repos
                 var parameters = new DynamicParameters();
                 parameters.Add("@AuctionID", auctionID);
 
-                db.Execute("DeleteAuction", parameters, commandType: CommandType.StoredProcedure);
+                db.Execute("sp_DeleteAuction", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 

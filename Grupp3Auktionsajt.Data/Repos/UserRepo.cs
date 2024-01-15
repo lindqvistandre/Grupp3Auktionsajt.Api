@@ -15,27 +15,27 @@ namespace Grupp3Auktionsajt.Data.Repos
             public string Password { get; set; }
         }
 
-        [HttpPost]
-        [Route("login")]
-        public IActionResult Login(UserLoginModel user)
-        {
-            // Här ska du lägga till koden för att ansluta till databasen
-            // och anropa din Stored Procedure med användaruppgifterna.
+        //[HttpPost]
+        //[Route("login")]
+        //public IActionResult Login(UserLoginModel user)
+        //{
+        //    // Här ska du lägga till koden för att ansluta till databasen
+        //    // och anropa din Stored Procedure med användaruppgifterna.
 
-            // Låt oss anta att du har en metod som heter `AuthenticateUser` som gör detta och returnerar UserId
-            var userId = AuthenticateUser(user.Username, user.Password);
+        //    // Låt oss anta att du har en metod som heter `AuthenticateUser` som gör detta och returnerar UserId
+        //    var userId = AuthenticateUser(user.Username, user.Password);
 
-            if (userId != null)
-            {
-                // Användaren är autentiserad
-                return Ok(userId);
-            }
-            else
-            {
-                // Autentisering misslyckades
-                return UnauthorizedResult();
-            }
-        }
+        //    if (userId != null)
+        //    {
+        //        // Användaren är autentiserad
+        //        return Ok(userId);
+        //    }
+        //    else
+        //    {
+        //        // Autentisering misslyckades
+        //        return UnauthorizedResult();
+        //    }
+        //}
 
         
     }

@@ -9,7 +9,7 @@ Where BidId = @DeleteByID
 End;
 
 --Finns det inga bud på en auktion skall den kunna tas bort. Det skall även gå att
-Create procedure DeleteAuction(@DeleteByID int)
+Create procedure sp_DeleteAuction(@DeleteByID int)
 As
 Begin
 Delete 
@@ -35,7 +35,7 @@ end;
 
 
 -- stored procedure för bid -- 
-CREATE PROCEDURE CreateBid
+CREATE PROCEDURE sp_CreateBid
     @AuctionId INT,
     @UserId INT,
     @BidPrice DECIMAL(18, 2)
@@ -94,7 +94,7 @@ end;
 
 -- visar bids om pågående auction, alternativ 
 
-CREATE PROCEDURE GetBidsForAuction
+CREATE PROCEDURE sp_GetBidsForAuction
     @AuctionId INT
 AS
 BEGIN
@@ -120,7 +120,7 @@ END
 END;
 
 
-CREATE PROCEDURE UserLogin
+CREATE PROCEDURE sp_UserLogin
     @Username NVARCHAR(50),
     @Password NVARCHAR(50)
 AS

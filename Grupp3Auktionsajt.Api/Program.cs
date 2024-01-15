@@ -11,6 +11,8 @@ using Grupp3Auktionsajt.Domain.Models.Entities;
 //using Grupp3Auktionsajt.Domain.Models.Profiles;
 using Microsoft.AspNetCore.SignalR;
 using AutoMapper;
+using Grupp3Auktionsajt.Core.Interfaces;
+using Grupp3Auktionsajt.Core.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +20,7 @@ builder.WebHost.UseUrls("http://localhost:5265");
 
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IDBContext, DBContext>();
+builder.Services.AddScoped<IAuctionService, AuctionService>();
 builder.Services.AddScoped<IAuctionRepo, AuctionRepo>();
 
 

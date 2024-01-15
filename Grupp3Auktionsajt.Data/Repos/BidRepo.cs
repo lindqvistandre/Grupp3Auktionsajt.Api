@@ -25,7 +25,7 @@ namespace Grupp3Auktionsajt.Data.Repos
                 var parameters = new DynamicParameters();
                 parameters.Add("@BidID", bidID);
 
-                db.Execute("DeleteBid", parameters, commandType: CommandType.StoredProcedure);
+                db.Execute("sp_DeleteBid", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
@@ -33,7 +33,7 @@ namespace Grupp3Auktionsajt.Data.Repos
         {
             using (var db = _context.GetConnection())
             {
-                return db.Query<Bid>("GetBidsForAuction", new { AuctionId = auctionId }, commandType: CommandType.StoredProcedure).ToList();
+                return db.Query<Bid>("sp_GetBidsForAuction", new { AuctionId = auctionId }, commandType: CommandType.StoredProcedure).ToList();
             }
         }
         public void CreateBid(int auctionId, int userId, decimal bidPrice)
@@ -43,7 +43,7 @@ namespace Grupp3Auktionsajt.Data.Repos
                 try
                 {
                     // Anropa den lagrade proceduren "CreateBid"
-                    db.Execute("CreateBid", new { AuctionId = auctionId, UserId = userId, BidPrice = bidPrice }, commandType: CommandType.StoredProcedure);
+                    db.Execute("sp_CreateBid", new { AuctionId = auctionId, UserId = userId, BidPrice = bidPrice }, commandType: CommandType.StoredProcedure);
 
                    
                 }
