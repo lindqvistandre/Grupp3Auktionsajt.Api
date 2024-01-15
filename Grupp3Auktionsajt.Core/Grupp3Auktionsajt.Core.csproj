@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <PackageReference Include="Dapper" Version="2.1.28" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Grupp3Auktionsajt.Data\Grupp3Auktionsajt.Data.csproj" />
   </ItemGroup>
 
 </Project>
