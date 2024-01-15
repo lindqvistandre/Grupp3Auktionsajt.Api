@@ -4,6 +4,10 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
+using Microsoft.Data.SqlClient;
+using Grupp3Auktionsajt.Data.Interfaces;
+
 
 namespace Grupp3Auktionsajt.Data.Repos
 {
@@ -19,7 +23,7 @@ namespace Grupp3Auktionsajt.Data.Repos
 
         public static void DeleteAuction(int auctionID)
         {
-            using (IDbConnection db = new SqlConnection(_connString))
+            using (var db = _context.GetConnection())
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@AuctionID", auctionID);
