@@ -30,7 +30,8 @@ namespace Grupp3Auktionsajt.Api.Controllers
             return Ok();
             
         }
-        
+        [HttpPost]
+        [Authorize("create-auction")]
         public IActionResult CreateAuction([FromBody] CreateAuctionDTO auctionDTO)
         {
             try

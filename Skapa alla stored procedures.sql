@@ -1,6 +1,6 @@
 -- Det går även att ångra dvs ta bort ett bud om auktionen inte är avslutad.
 
-Create procedure DeleteBid(@DeleteByID int)
+Create procedure sp_DeleteBid(@DeleteByID int)
 As
 Begin
 Delete 
@@ -26,11 +26,11 @@ create procedure sp_CreateAuction
 	@CreatorUserId int
 as
 begin
-	declare @EndDate datetime;
-	set @EndDate = getdate() + @Days;
+	declare @StartDate datetime = getdate();
+	declare @EndDate datetime = @StartDate + @Days;
 
 	insert into Auctions (Title, Description, Price, StartDate, EndDate, CreatorUserId)
-	values (@Title, @Description, @Price, getdate(), @EndDate, @CreatorUserId);
+	values (@Title, @Description, @Price, @StartDate, @EndDate, @CreatorUserId);
 end;
 
 
