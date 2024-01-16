@@ -27,7 +27,7 @@ namespace Grupp3Auktionsajt.Data.Repos
                 var parameters = new DynamicParameters();
                 parameters.Add("@BidID", bidID);
 
-                db.Execute("DeleteBid", parameters, commandType: CommandType.StoredProcedure);
+                db.Execute("sp.DeleteBid", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
