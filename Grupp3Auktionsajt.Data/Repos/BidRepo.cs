@@ -1,10 +1,12 @@
 ﻿using Dapper;
 using Grupp3Auktionsajt.Domain.Models.Entities;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,7 +27,7 @@ namespace Grupp3Auktionsajt.Data.Repos
                 var parameters = new DynamicParameters();
                 parameters.Add("@BidID", bidID);
 
-                db.Execute("sp_DeleteBid", parameters, commandType: CommandType.StoredProcedure);
+                db.Execute("DeleteBid", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
@@ -40,31 +42,32 @@ namespace Grupp3Auktionsajt.Data.Repos
         {
             using (var db = _context.GetConnection())
             {
-                try
+                // Kontrollera om auktionen är öppen
+                var isOpen = db.QueryFirstOrDefault<bool>("SELECT IsOpen FROM Auctions WHERE AuctionId = @AuctionId", new { AuctionId = auctionId });
+                if (!isOpen)
                 {
                     // Anropa den lagrade proceduren "CreateBid"
                     db.Execute("sp_CreateBid", new { AuctionId = auctionId, UserId = userId, BidPrice = bidPrice }, commandType: CommandType.StoredProcedure);
 
-                   
-                }
-                catch (SqlException ex)
-                {
-                    // Hantera specifika fel som genereras av RAISERROR i SQL
-                    if (ex.Number == 50000) // Anpassade fel för användardefinierade fel
+                    // Kontrollera att användaren inte är skaparen av auktionen
+                    var creatorId = db.QueryFirstOrDefault<int>("SELECT UserId FROM Auctions WHERE AuctionId = @AuctionId", new { AuctionId = auctionId });
+                    if (userId == creatorId)
                     {
-                       
-                    }
-                    else
-                    {
-                        
+                        throw new InvalidOperationException("Du kan inte lägga bud på din egen auktion.");
                     }
 
-                   
-                    throw;
+                    // Kontrollera att budet är högre än det nuvarande högsta budet
+                    var highestBid = db.QueryFirstOrDefault<decimal>("SELECT MAX(BidPrice) FROM Bids WHERE AuctionId = @AuctionId", new { AuctionId = auctionId });
+                    if (bidPrice <= highestBid)
+                    {
+                        throw new InvalidOperationException("Budet är för lågt.");
+                    }
 
-                    
+                    // Lägg till budet
+                    db.Execute("CreateBid", new { AuctionId = auctionId, UserId = userId, BidPrice = bidPrice }, commandType: CommandType.StoredProcedure);
                 }
             }
         }
     }
 }
+

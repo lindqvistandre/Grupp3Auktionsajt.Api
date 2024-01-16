@@ -1,4 +1,5 @@
 ﻿using Grupp3Auktionsajt.Domain.Models.DTO;
+using Grupp3Auktionsajt.Domain.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace Grupp3Auktionsajt.Core.Interfaces
     {
         void DeleteAuction(int auctionID);
         void CreateAuction(CreateAuctionDTO auctionDTO, int UserId);
+        void CreateBid(Bid bid);
+        object GetBidsForAuction(int auctionId);
     }
 }
