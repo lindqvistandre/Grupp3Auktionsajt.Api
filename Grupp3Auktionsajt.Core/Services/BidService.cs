@@ -12,8 +12,6 @@ namespace Grupp3Auktionsajt.Core.Services
     public class BidService: IBidService
     {
         private readonly IBidRepo _repo;
-
-
       
         public BidService(IBidRepo repo)
         {

@@ -19,11 +19,13 @@ namespace Grupp3Auktionsajt.Data.Repos
             _context = context;
         }
 
-        // User Login
+        // Methods for the following 3 classes needs to be made, Kevin
 
-        // Create User
+        // UserLogin
 
-        // Update User
+        // CreateUser
+
+        // UpdateUser
 
 
     }

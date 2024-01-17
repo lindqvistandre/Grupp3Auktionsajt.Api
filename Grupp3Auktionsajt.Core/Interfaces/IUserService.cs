@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Grupp3Auktionsajt.Core.Interfaces
 {
-    internal interface IUserService
+    public interface IUserService
     {
+
     }
 }

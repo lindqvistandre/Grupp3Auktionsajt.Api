@@ -1,4 +1,5 @@
-﻿using Grupp3Auktionsajt.Domain.Models.Entities;
+﻿using Grupp3Auktionsajt.Domain.Models.DTO;
+using Grupp3Auktionsajt.Domain.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Grupp3Auktionsajt.Data.Interfaces
     {
         void DeleteBid(int bidID);
         // Metod för att skapa ett nytt bud
-        void CreateBid(int auctionId, int userId, decimal bidPrice);
+        void CreateBid(int userId, CreateBidDto createBidDto); // Updated the in-parameters here aswell, Kevin
 
         // Metod för att hämta alla bud för en specifik auktion
         List<Bid> GetBidsForAuction(int auctionId);

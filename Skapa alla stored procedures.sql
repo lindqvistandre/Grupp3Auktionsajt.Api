@@ -1,4 +1,4 @@
-------------------------------- Users table
+------------------------------- Users table         -- All correct for this table, Kevin
 CREATE PROCEDURE sp_UserLogin
     @Username NVARCHAR(20),
     @Password NVARCHAR(20)
@@ -31,7 +31,8 @@ BEGIN
     -- Uppdatera användarinformation i Users-tabellen baserat på användar-ID
     UPDATE Users
     SET
-        Password = @Password
+        Username = isnull(@Username, Username),        -- Added in the style of "isnull(@Parameter, Parameter). This means that if the in-parameter is null, then the column in the database will not change.
+        Password = isnull(@Password, [Password])       -- This in other words allows you to choose beetween updating one or both parameters using only 1 stored procedure, Kevin.
     WHERE
         UserID = @UserID;
 END
@@ -39,7 +40,7 @@ END
 -- Föregående kod om det finns...
 GO
 
-CREATE PROCEDURE UserLogin
+CREATE PROCEDURE sp_UserLogin
     @Username NVARCHAR(50),
     @Password NVARCHAR(50)
 AS
@@ -56,7 +57,7 @@ GO
 
 -- Det går även att ångra dvs ta bort ett bud om auktionen inte är avslutad.
 
-Create procedure sp_DeleteBid(@DeleteByID int)
+Create procedure sp_DeleteBid(@DeleteByID int)      -- Correct, Kevin
 As
 Begin
 Delete 
@@ -66,7 +67,7 @@ End;
 
 
 -- stored procedure för lista bid -- 
-CREATE PROCEDURE sp_GetBidsForAuction
+CREATE PROCEDURE sp_GetBidsForAuction       -- Probably correct, but this will work, Kevin
     @AuctionId INT
 AS
 BEGIN
@@ -77,7 +78,7 @@ BEGIN
 END;
 
 
--- stored procedure för create bid --
+-- stored procedure för create bid --               -- Correct, Kevin
 
 CREATE PROCEDURE CreateBid
     @AuctionId INT,
@@ -92,9 +93,7 @@ END;
 
 -------------------------------Auction table
 
-
---Finns det inga bud på en auktion skall den kunna tas bort. Det skall även gå att
-
+-- Create an auction            -- Correct, Kevin
 create procedure sp_CreateAuction
 	@Title nvarchar(100),
 	@Description nvarchar(max),
@@ -120,10 +119,10 @@ From Auctions
 Where AuctionID = @DeleteByID
 End;
 
--- Create an auction,
 
 
--- Eventuell efterföljande kod...
+
+-- Eventuell efterföljande kod...      -- Correct, Kevin
 
 CREATE PROCEDURE UpdateAuctionPrice
     @AuctionId INT,
@@ -136,9 +135,8 @@ BEGIN
 END
 GO
 
--- Search auctions
-
-create procedure sp_SearchAuctions
+-- Search auctions                 -- Correct, Kevin
+create procedure sp_SearchAuctions  
 	@SearchTerm nvarchar (100)
 as
 begin

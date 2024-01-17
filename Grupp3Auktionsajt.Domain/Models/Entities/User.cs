@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Grupp3Auktionsajt.Domain.Models.Entities
 {
-    public class User // klar
+    public class User // Correct
     {
         public int UserId { get; set; }
         public string Username { get; set; }

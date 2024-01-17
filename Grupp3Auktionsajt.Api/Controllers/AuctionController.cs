@@ -24,14 +24,14 @@ namespace Grupp3Auktionsajt.Api.Controllers
         }
 
         [HttpPost("{auctionId}")]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public IActionResult DeleteAuction(int auctionId) 
         {
             return Ok();
             
         }
-        [HttpPost]
-        [Authorize("create-auction")]
+        [HttpPost("create-auction")]
+        [Authorize(Roles = "User")]
         public IActionResult CreateAuction([FromBody] CreateAuctionDTO auctionDTO)
         {
             try
