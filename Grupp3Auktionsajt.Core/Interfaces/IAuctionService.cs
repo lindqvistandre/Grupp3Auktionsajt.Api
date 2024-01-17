@@ -12,7 +12,6 @@ namespace Grupp3Auktionsajt.Core.Interfaces
     {
         void DeleteAuction(int auctionID);
         void CreateAuction(CreateAuctionDTO auctionDTO, int UserId);
-        void CreateBid(Bid bid);
-        object GetBidsForAuction(int auctionId);
+        
     }
 }
