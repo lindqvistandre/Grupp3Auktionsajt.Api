@@ -24,10 +24,20 @@ namespace Grupp3Auktionsajt.Api.Controllers
         }
 
         [HttpPost("{bidId}")]
-        public IActionResult DeleteBid(int bidId)
+        public IActionResult DeleteBid([FromBody] DeleteBidDTO deleteBidDto)
         {
 
-            return Ok();
+            try
+            {
+                var bid = _mapper.Map<Bid>(deleteBidDto); // Mappar från DeleteBidDto till Bid
+                _service.CreateBid(bid);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error creating a new bid");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the bid");
+            }
 
         }
 
