@@ -20,16 +20,6 @@ namespace Grupp3Auktionsajt.Data.Repos
         {
             _context = context;
         }
-        public void DeleteBid(int bidID)
-        {
-            using (var db = _context.GetConnection())
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@BidID", bidID);
-
-                db.Execute("sp.DeleteBid", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
 
         public List<Bid> GetBidsForAuction(int auctionId)
         {
@@ -66,6 +56,16 @@ namespace Grupp3Auktionsajt.Data.Repos
                     // Lägg till budet
                     db.Execute("CreateBid", new { AuctionId = auctionId, UserId = userId, BidPrice = bidPrice }, commandType: CommandType.StoredProcedure);
                 }
+            }
+        }
+        public void DeleteBid(int bidID)
+        {
+            using (var db = _context.GetConnection())
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@BidID", bidID);
+
+                db.Execute("sp.DeleteBid", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }

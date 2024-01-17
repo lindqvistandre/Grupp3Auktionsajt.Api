@@ -19,20 +19,11 @@ namespace Grupp3Auktionsajt.Data.Repos
             _context = context;
         }
 
-        public void UpdateAuctionPrice(int auctionId, decimal newPrice)
-        {
-            using (var db = _context.GetConnection())
-            {
-                var parameters = new DynamicParameters();
-
-                parameters.Add("@AuctionId", auctionId);
-                parameters.Add("@NewPrice", newPrice);
-
-                db.Execute("sp_UpdateAuctionPrice", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
+        // User Login
 
         // Create User
+
+        // Update User
 
 
     }

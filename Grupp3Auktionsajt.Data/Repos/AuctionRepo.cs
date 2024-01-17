@@ -22,20 +22,8 @@ namespace Grupp3Auktionsajt.Data.Repos
         {
             _context = context;
         }
-       
 
-        public void DeleteAuction(int auctionID)
-        {
-            using (var db = _context.GetConnection())
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@AuctionID", auctionID);
-
-                db.Execute("sp_DeleteAuction", parameters, commandType: CommandType.StoredProcedure);
-            }
-        }
-
-        public void CreateAuction (CreateAuctionDTO auctionDTO, int UserId)
+        public void CreateAuction(CreateAuctionDTO auctionDTO, int UserId)
         {
             using (var db = _context.GetConnection())
             {
@@ -49,14 +37,41 @@ namespace Grupp3Auktionsajt.Data.Repos
             }
         }
 
-        public IEnumerable<Auction> SearchAuction(string SearchTerm)
+        public void UpdateAuctionPrice(int auctionId, decimal newPrice)
+        {
+            using (var db = _context.GetConnection())
+            {
+                var parameters = new DynamicParameters();
+
+                parameters.Add("@AuctionId", auctionId);
+                parameters.Add("@NewPrice", newPrice);
+
+                db.Execute("sp_UpdateAuctionPrice", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+
+        public void DeleteAuction(int auctionID)
+        {
+            using (var db = _context.GetConnection())
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@AuctionID", auctionID);
+
+                db.Execute("sp_DeleteAuction", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+       
+
+        public IEnumerable<Auction> SearchAuctions(string SearchTerm)
         {
             using (var db = _context.GetConnection())
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("SearchTerm", SearchTerm);
 
-                return db.Query<Auction>("sp_SearchAuction", parameters, commandType: CommandType.StoredProcedure);
+                return db.Query<Auction>("sp_SearchAuctions", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
