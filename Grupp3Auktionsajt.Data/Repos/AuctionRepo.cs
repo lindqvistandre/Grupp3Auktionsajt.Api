@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Grupp3Auktionsajt.Data.Interfaces;
 using Grupp3Auktionsajt.Domain.Models.DTO;
+using Grupp3Auktionsajt.Domain.Models.Entities;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -47,5 +48,18 @@ namespace Grupp3Auktionsajt.Data.Repos
                 db.Execute("sp_CreateAuction", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public IEnumerable<Auction> SearchAuction(string SearchTerm)
+        {
+            using (var db = _context.GetConnection())
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("SearchTerm", SearchTerm);
+
+                return db.Query<Auction>("sp_SearchAuction", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        // UpdateAuction
     }
 }

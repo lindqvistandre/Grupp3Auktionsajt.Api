@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -9,53 +10,29 @@ using System.Threading.Tasks;
 
 namespace Grupp3Auktionsajt.Data.Repos
 {
-    internal class UserRepo
+    public class UserRepo
     {
-        public class UserLoginModel
+        private readonly DBContext _context;
+
+        public UserRepo(DBContext context)
         {
-            public string Username { get; set; }
-            public string Password { get; set; }
+            _context = context;
         }
 
-        public bool UpdateAuctionPrice(int auctionId, decimal newPrice)
+        public void UpdateAuctionPrice(int auctionId, decimal newPrice)
         {
-            using (SqlConnection connection = new SqlConnection("Data Source=localhost;Initial Catalog=Grupp3Auktionsajt;Integrated Security=true;trustservercertificate=true"))
+            using (var db = _context.GetConnection())
             {
-                SqlCommand command = new SqlCommand("UpdateAuctionPrice", connection);
-                command.CommandType = CommandType.StoredProcedure;
+                var parameters = new DynamicParameters();
 
-                command.Parameters.AddWithValue("@AuctionId", auctionId);
-                command.Parameters.AddWithValue("@NewPrice", newPrice);
+                parameters.Add("@AuctionId", auctionId);
+                parameters.Add("@NewPrice", newPrice);
 
-                connection.Open();
-                int result = command.ExecuteNonQuery();
-
-                return result > 0;
+                db.Execute("sp_UpdateAuctionPrice", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
-
-        //[HttpPost]
-        //[Route("login")]
-        //public IActionResult Login(UserLoginModel user)
-        //{
-        //    // Här ska du lägga till koden för att ansluta till databasen
-        //    // och anropa din Stored Procedure med användaruppgifterna.
-
-        //    // Låt oss anta att du har en metod som heter `AuthenticateUser` som gör detta och returnerar UserId
-        //    var userId = AuthenticateUser(user.Username, user.Password);
-
-        //    if (userId != null)
-        //    {
-        //        // Användaren är autentiserad
-        //        return Ok(userId);
-        //    }
-        //    else
-        //    {
-        //        // Autentisering misslyckades
-        //        return UnauthorizedResult();
-        //    }
-        //}
+        // Create User
 
 
     }
