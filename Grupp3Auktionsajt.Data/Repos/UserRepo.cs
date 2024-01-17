@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,24 @@ namespace Grupp3Auktionsajt.Data.Repos
             public string Username { get; set; }
             public string Password { get; set; }
         }
+
+        public bool UpdateAuctionPrice(int auctionId, decimal newPrice)
+        {
+            using (SqlConnection connection = new SqlConnection("Data Source=localhost;Initial Catalog=Grupp3Auktionsajt;Integrated Security=true;trustservercertificate=true"))
+            {
+                SqlCommand command = new SqlCommand("UpdateAuctionPrice", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@AuctionId", auctionId);
+                command.Parameters.AddWithValue("@NewPrice", newPrice);
+
+                connection.Open();
+                int result = command.ExecuteNonQuery();
+
+                return result > 0;
+            }
+        }
+
 
         //[HttpPost]
         //[Route("login")]
@@ -37,6 +57,6 @@ namespace Grupp3Auktionsajt.Data.Repos
         //    }
         //}
 
-        
+
     }
 }
