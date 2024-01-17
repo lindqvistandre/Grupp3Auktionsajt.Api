@@ -105,6 +105,19 @@ BEGIN
 END
 GO
 
+-- Search auctions
+
+create procedure sp_SearchAuctions
+	@SearchTerm nvarchar (100)
+as
+begin
+	set @SearchTerm = '%'+ @SearchTerm +'%'
+
+	select AuctionId, Title
+	from Auctions
+	where Title like @SearchTerm
+end;
+
 
 
 
