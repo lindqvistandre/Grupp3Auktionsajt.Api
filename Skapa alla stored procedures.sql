@@ -68,15 +68,7 @@ END;
 
 
 --Finns det inga bud på en auktion skall den kunna tas bort. Det skall även gå att
-Create procedure sp_DeleteAuction(@DeleteByID int)
-As
-Begin
-Delete 
-From Auctions
-Where AuctionID = @DeleteByID
-End;
 
--- Create an auction,
 create procedure sp_CreateAuction
 	@Title nvarchar(100),
 	@Description nvarchar(max),
@@ -91,6 +83,19 @@ begin
 	insert into Auctions (Title, Description, Price, StartDate, EndDate, CreatorUserId)
 	values (@Title, @Description, @Price, @StartDate, @EndDate, @CreatorUserId);
 end;
+
+
+
+Create procedure sp_DeleteAuction(@DeleteByID int)
+As
+Begin
+Delete 
+From Auctions
+Where AuctionID = @DeleteByID
+End;
+
+-- Create an auction,
+
 
 -- Eventuell efterföljande kod...
 
