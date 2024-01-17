@@ -1,7 +1,7 @@
 ------------------------------- Users table
 CREATE PROCEDURE sp_UserLogin
-    @Username NVARCHAR(50),
-    @Password NVARCHAR(50)
+    @Username NVARCHAR(20),
+    @Password NVARCHAR(20)
 AS
 BEGIN
     SELECT UserId
@@ -12,8 +12,8 @@ GO
 
 --Create User 
 CREATE PROCEDURE sp_CreateUser
-    @UserName NVARCHAR(255),
-    @Password NVARCHAR(255)
+    @UserName NVARCHAR(20),
+    @Password NVARCHAR(20)
 AS
 BEGIN
     -- Skapa en ny användare i Users-tabellen
