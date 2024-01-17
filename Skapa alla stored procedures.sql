@@ -76,21 +76,6 @@ BEGIN
     VALUES (@AuctionId, @UserId, @BidPrice);
 END;
 
--- Create an auction,
-create procedure sp_CreateAuction
-	@Title nvarchar(100),
-	@Description nvarchar(max),
-	@Price decimal(18,2),
-	@Days int,
-	@CreatorUserId int
-as
-begin
-	declare @EndDate datetime;
-	set @EndDate = getdate() + @Days;
-
-	insert into Auctions (Title, Description, Price, StartDate, EndDate, CreatorUserId)
-	values (@Title, @Description, @Price, getdate(), @EndDate, @CreatorUserId);
-end;
 
 -- visar bids om pågående auction, alternativ 
 
@@ -130,5 +115,3 @@ BEGIN
     WHERE Username = @Username AND Password = @Password
 END
 GO
-
--- HEJ
