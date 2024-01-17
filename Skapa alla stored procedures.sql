@@ -34,75 +34,28 @@ begin
 end;
 
 
--- stored procedure för bid -- 
-CREATE PROCEDURE sp_CreateBid
+-- stored procedure för lista bid -- 
+CREATE PROCEDURE sp_GetBidsForAuction
+    @AuctionId INT
+AS
+BEGIN
+    SELECT b.BidId, b.UserId, b.BidPrice, b.BidTimeStamp 
+    FROM Bids b 
+    WHERE b.AuctionId = @AuctionId
+    ORDER BY b.BidPrice DESC;
+END;
+
+-- stored procedure för create bid --
+
+CREATE PROCEDURE CreateBid
     @AuctionId INT,
     @UserId INT,
     @BidPrice DECIMAL(18, 2)
 AS
 BEGIN
-    -- Kontrollera om auktionen är öppen med en BOOL
-    DECLARE @IsOpen BIT;
-    SELECT @IsOpen = IsOpen FROM Auctions WHERE AuctionId = @AuctionId;
-
-    IF @IsOpen = 0
-    BEGIN
-        RAISERROR ('Auktionen är inte öppen för bud.', 16, 1);
-        RETURN;
-    END
-
-    -- Kontrollerar att användaren inte är skaparen av auktionen
-    DECLARE @CreatorId INT;
-    SELECT @CreatorId = UserId FROM Auctions WHERE AuctionId = @AuctionId;
-
-    IF @UserId = @CreatorId
-    BEGIN
-        RAISERROR ('Du kan inte lägga bud på din egen auktion.', 16, 1);
-        RETURN;
-    END
-
-    -- Kontrollera att budet är högre än det nuvarande högsta budet
-    DECLARE @HighestBid DECIMAL(18, 2);
-    SELECT @HighestBid = ISNULL(MAX(BidPrice), 0) FROM Bids WHERE AuctionId = @AuctionId;
-
-    IF @BidPrice <= @HighestBid
-    BEGIN
-        RAISERROR ('Budet är för lågt.', 16, 1);
-        RETURN;
-    END
-
-    -- Skapar budet
     INSERT INTO Bids (AuctionId, UserId, BidPrice)
     VALUES (@AuctionId, @UserId, @BidPrice);
-END;
-
-
--- visar bids om pågående auction, alternativ 
-
-CREATE PROCEDURE sp_GetBidsForAuction
-    @AuctionId INT
-AS
-BEGIN
--- Kontrollera om auktionen är öppen eller stängd
-DECLARE @IsOpen BIT;
-SELECT @IsOpen = IsOpen FROM Auctions WHERE AuctionId = @AuctionId;
-IF @IsOpen = 1
-BEGIN
-    -- Om auktionen är öppen, visa alla bud
-    SELECT b.BidId, b.UserId, b.BidPrice, b.BidTimeStamp 
-    FROM Bids b 
-    WHERE b.AuctionId = @AuctionId
-    ORDER BY b.BidPrice DESC;
-END
-ELSE
-BEGIN
-    -- Om auktionen är stängd, visa endast det högsta budet
-    SELECT TOP 1 b.BidId, b.UserId, b.BidPrice, b.BidTimeStamp 
-    FROM Bids b 
-    WHERE b.AuctionId = @AuctionId
-    ORDER BY b.BidPrice DESC;
-END
-END;
+END;    
 
 
 CREATE PROCEDURE sp_UserLogin
