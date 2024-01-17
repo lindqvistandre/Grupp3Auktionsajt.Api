@@ -13,8 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grupp3Auktionsajt.Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{32FDD4EC-79EF-4B58-A0B2-DC3DC076033D}"
 	ProjectSection(SolutionItems) = preProject
+		Mock data (cs).cs = Mock data (cs).cs
 		mock data.sql = mock data.sql
+		Skapa alla stored procedures (cs).cs = Skapa alla stored procedures (cs).cs
 		Skapa alla stored procedures.sql = Skapa alla stored procedures.sql
+		skapa alla tabeller (cs).cs = skapa alla tabeller (cs).cs
 		skapa tabeller.sql = skapa tabeller.sql
 	EndProjectSection
 EndProject
