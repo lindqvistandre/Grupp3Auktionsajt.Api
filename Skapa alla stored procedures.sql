@@ -9,6 +9,18 @@ BEGIN
     WHERE Username = @Username AND Password = @Password
 END
 GO
+
+--Create User 
+CREATE PROCEDURE sp_CreateUser
+    @UserName NVARCHAR(255),
+    @Password NVARCHAR(255)
+AS
+BEGIN
+    -- Skapa en ny användare i Users-tabellen
+    INSERT INTO Users (UserName, Password)
+    VALUES (@UserName, @Password);
+END
+
 -- Update för User 
 CREATE PROCEDURE sp_UpdateUser
     @UserID INT,
