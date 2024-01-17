@@ -78,3 +78,14 @@ END
 GO
 
 -- Eventuell efterföljande kod...
+
+CREATE PROCEDURE UpdateAuctionPrice
+    @AuctionId INT,
+    @NewPrice DECIMAL(18,2)
+AS
+BEGIN
+    UPDATE Auctions
+    SET Price = @NewPrice
+    WHERE AuctionId = @AuctionId
+END
+GO
