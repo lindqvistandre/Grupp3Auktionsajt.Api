@@ -68,3 +68,30 @@ BEGIN
     WHERE Username = @Username AND Password = @Password
 END
 GO
+
+-- Föregående kod om det finns...
+GO
+
+CREATE PROCEDURE UserLogin
+    @Username NVARCHAR(50),
+    @Password NVARCHAR(50)
+AS
+BEGIN
+    SELECT UserId
+    FROM Users
+    WHERE Username = @Username AND Password = @Password
+END
+GO
+
+-- Eventuell efterföljande kod...
+
+CREATE PROCEDURE UpdateAuctionPrice
+    @AuctionId INT,
+    @NewPrice DECIMAL(18,2)
+AS
+BEGIN
+    UPDATE Auctions
+    SET Price = @NewPrice
+    WHERE AuctionId = @AuctionId
+END
+GO
