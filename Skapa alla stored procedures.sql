@@ -10,6 +10,38 @@ BEGIN
 END
 GO
 
+--Create User 
+CREATE PROCEDURE sp_CreateUser
+    @UserName NVARCHAR(255),
+    @Password NVARCHAR(255)
+AS
+BEGIN
+    -- Skapa en ny användare i Users-tabellen
+    INSERT INTO Users (UserName, Password)
+    VALUES (@UserName, @Password);
+END
+
+-- Update för User 
+CREATE PROCEDURE sp_UpdateUser
+    @UserID INT,
+    @UserName NVARCHAR(255),
+    @Password NVARCHAR(255)
+    -- Lägg till andra parametrar om det behövs
+AS
+BEGIN
+    -- Uppdatera användarinformation i Users-tabellen baserat på användar-ID
+
+    UPDATE Users
+    SET
+        Password = @Password
+        -- Uppdatera andra kolumner om det behövs
+    WHERE
+        UserID = @UserID;
+
+    -- Du kan lägga till fler uppdateringar här om det behövs för andra kolumner.
+
+END
+
 -- Föregående kod om det finns...
 GO
 
