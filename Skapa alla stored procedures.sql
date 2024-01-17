@@ -24,22 +24,16 @@ END
 -- Update för User 
 CREATE PROCEDURE sp_UpdateUser
     @UserID INT,
-    @UserName NVARCHAR(255),
-    @Password NVARCHAR(255)
-    -- Lägg till andra parametrar om det behövs
+    @UserName NVARCHAR(20),
+    @Password NVARCHAR(20)
 AS
 BEGIN
     -- Uppdatera användarinformation i Users-tabellen baserat på användar-ID
-
     UPDATE Users
     SET
         Password = @Password
-        -- Uppdatera andra kolumner om det behövs
     WHERE
         UserID = @UserID;
-
-    -- Du kan lägga till fler uppdateringar här om det behövs för andra kolumner.
-
 END
 
 -- Föregående kod om det finns...
