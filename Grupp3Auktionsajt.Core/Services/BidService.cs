@@ -20,6 +20,7 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo = repo;
         }
 
+
         public bool DeleteBid(int userID, int bidID)        // Liknar hur ni ska göra i "DeleteAuction"
         {
             // 1. Call a stored procedure to get the bid based on BidId
@@ -38,6 +39,12 @@ namespace Grupp3Auktionsajt.Core.Services
                 return false;
             }
         }
+
+        public List<Bid> GetBidsForAuction(int auctionId)
+        {
+            return _repo.GetBidsForAuction(auctionId);
+        }
+
 
         public void CreateBid(int userId, CreateBidDto createBidDto) // Correct
         {

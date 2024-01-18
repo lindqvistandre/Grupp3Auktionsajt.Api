@@ -39,9 +39,9 @@ namespace Grupp3Auktionsajt.Core.Services
             
         }
 
-        public void CreateAuction(CreateAuctionDTO auctionDTO, int UserId) // Correct
+        public void CreateAuction(int UserId, CreateAuctionDTO auctionDTO) // Correct
         {
-            _repo.CreateAuction(auctionDTO, UserId);
+            _repo.CreateAuction(UserId, auctionDTO);
         }
     }
 

@@ -13,7 +13,7 @@ namespace Grupp3Auktionsajt.Data.Interfaces
         void DeleteAuction(int auctionID);
 
 
-        void CreateAuction(CreateAuctionDTO auctionDTO, int UserId);
+        void CreateAuction(int UserId, CreateAuctionDTO auctionDTO);
 
         void UpdateAuctionPrice(int auctionId, decimal newPrice);
 

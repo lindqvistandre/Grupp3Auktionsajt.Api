@@ -23,7 +23,7 @@ namespace Grupp3Auktionsajt.Data.Repos
             _context = context;
         }
 
-        public void CreateAuction(CreateAuctionDTO auctionDTO, int UserId)
+        public void CreateAuction(int UserId, CreateAuctionDTO auctionDTO)
         {
             using (var db = _context.GetConnection())
             {
