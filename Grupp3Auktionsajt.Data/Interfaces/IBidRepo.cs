@@ -10,7 +10,7 @@ namespace Grupp3Auktionsajt.Data.Interfaces
 {
     public interface IBidRepo
     {
-        void DeleteBid(int bidID);
+        void DeleteBid(int bidId);
         // Metod för att skapa ett nytt bud
         void CreateBid(int userId, CreateBidDto createBidDto); // Updated the in-parameters here aswell, Kevin
 

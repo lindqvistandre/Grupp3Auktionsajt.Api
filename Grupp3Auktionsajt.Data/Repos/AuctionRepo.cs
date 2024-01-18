@@ -75,6 +75,16 @@ namespace Grupp3Auktionsajt.Data.Repos
             }
         }
 
+        bool IAuctionRepo.DeleteAuction(int auctionID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Auction GetBidById(int auctionId)
+        {
+            throw new NotImplementedException();
+        }
+
         // UpdateAuction
     }
 }

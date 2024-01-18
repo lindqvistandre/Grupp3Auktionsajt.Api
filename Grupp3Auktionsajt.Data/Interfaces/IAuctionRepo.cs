@@ -10,7 +10,7 @@ namespace Grupp3Auktionsajt.Data.Interfaces
 {
     public interface IAuctionRepo
     {
-        void DeleteAuction(int auctionID);
+        bool DeleteAuction(int auctionID);
 
 
         void CreateAuction(int UserId, CreateAuctionDTO auctionDTO);
