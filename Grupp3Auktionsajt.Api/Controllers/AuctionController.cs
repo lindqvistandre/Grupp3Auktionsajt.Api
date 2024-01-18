@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Grupp3Auktionsajt.Core.Interfaces;
 using Grupp3Auktionsajt.Domain.Models.DTO;
+using Grupp3Auktionsajt.Domain.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,16 +24,33 @@ namespace Grupp3Auktionsajt.Api.Controllers
             _logger = logger;
         }
 
+
         [HttpPost("{auctionId}")]
         [Authorize(Roles = "User")]
         public IActionResult DeleteAuction(int auctionId) 
-        {
-            // Get user ID from claims
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        {            
+            try
+            {
+                // Get User ID from the claims
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
+                // try deleting the auction
+                var deleteAuction = _service.DeleteAuction(userId, auctionId);
 
-            return Ok();
-            
+                if (deleteAuction == true)
+                {
+                    return Ok("Delete auction successful");
+                }
+                else
+                {
+                    return BadRequest("Couldn't delete the auction");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while  deleting the auction");
+            }      
         }
 
 

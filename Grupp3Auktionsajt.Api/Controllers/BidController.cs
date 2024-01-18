@@ -25,11 +25,11 @@ namespace Grupp3Auktionsajt.Api.Controllers
             _logger = logger;
         }
 
+
         [HttpPost("{bidId}")]
         [Authorize(Roles = "User")]
         public IActionResult DeleteBid(int bidId)           // Liknar hur ni ska göra i "DeleteAuction"     // DeleteBid men har inte fixat service metoden för den än
         {
-
             try
             {
                 // Get User ID from the claims
@@ -40,7 +40,7 @@ namespace Grupp3Auktionsajt.Api.Controllers
 
                 if(deleteBid == true)
                 {
-                    return Ok("Delete successful");
+                    return Ok("Delete auction successful");
                 }
                 else
                 {
@@ -50,10 +50,11 @@ namespace Grupp3Auktionsajt.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the bid");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while  deleting the auction");
             }
 
         }
+
 
         [HttpPost]
         [Authorize(Roles = "User")]
@@ -74,6 +75,7 @@ namespace Grupp3Auktionsajt.Api.Controllers
             }
         }
 
+
         [HttpGet("auction/{auctionId}")]
         [AllowAnonymous]
         public IActionResult GetBidsForAuction(int auctionId)
@@ -90,7 +92,5 @@ namespace Grupp3Auktionsajt.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving bids");
             }
         }
-
-
     }
 }
