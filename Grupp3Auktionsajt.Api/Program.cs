@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.SignalR;
 using AutoMapper;
 using Grupp3Auktionsajt.Core.Interfaces;
 using Grupp3Auktionsajt.Core.Services;
+using Grupp3Auktionsajt.Domain.Models.Profiles;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,7 +46,9 @@ builder.Services.AddAuthentication(opt =>
 });
 
 // Automapper
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddAutoMapper(
+    typeof(Program).Assembly,
+    typeof(GetBidsForAuctionProfile).Assembly);
 
 
 var app = builder.Build();

@@ -18,8 +18,17 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo = repo;
         }
 
-        public void DeleteBid(int bidID)
+        public void DeleteBid(int userId, int bidID)
         {
+            /// You need check If the user who made the Bid deletes it.
+            
+            // 1. call a stored procedure that gets the Bid you want to delete based on BidId
+            // 2. check if userId of the user who tries to delete the bid matches the userId of the one who made the bid.
+
+
+            // check that you can't delete a bid after an auction is over
+
+            
             _repo.DeleteBid(bidID);
         }
 

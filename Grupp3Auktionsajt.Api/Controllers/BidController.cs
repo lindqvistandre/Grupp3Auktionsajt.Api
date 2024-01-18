@@ -5,6 +5,7 @@ using Grupp3Auktionsajt.Domain.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Grupp3Auktionsajt.Api.Controllers
 {
@@ -31,8 +32,10 @@ namespace Grupp3Auktionsajt.Api.Controllers
 
             try
             {
-                
-                _service.DeleteBid(bidId);
+                // Get User ID from the claims
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+                _service.DeleteBid(userId, bidId);
                 return Ok();
             }
             catch (Exception ex)
@@ -66,7 +69,7 @@ namespace Grupp3Auktionsajt.Api.Controllers
             try
             {
                 var bids = _service.GetBidsForAuction(auctionId);
-                var bidDtos = _mapper.Map<List<BidDto>>(bids); // Antag att detta mappar från Bid till BidDto
+                var bidDtos = _mapper.Map<List<BidDTO>>(bids); // Antag att detta mappar från Bid till BidDto
                 return Ok(bidDtos);
             }
             catch (Exception ex)

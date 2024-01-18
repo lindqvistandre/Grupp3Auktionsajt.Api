@@ -1,4 +1,5 @@
 ﻿using Grupp3Auktionsajt.Domain.Models.DTO;
+using Grupp3Auktionsajt.Domain.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace Grupp3Auktionsajt.Data.Interfaces
 
         void CreateAuction(CreateAuctionDTO auctionDTO, int UserId);
 
+        void UpdateAuctionPrice(int auctionId, decimal newPrice);
 
+        IEnumerable<Auction> SearchAuctions(string SearchTerm);
     }
 }
