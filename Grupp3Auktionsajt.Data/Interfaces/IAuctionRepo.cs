@@ -18,5 +18,7 @@ namespace Grupp3Auktionsajt.Data.Interfaces
         void UpdateAuctionPrice(int auctionId, decimal newPrice);
 
         IEnumerable<Auction> SearchAuctions(string SearchTerm);
+
+        Auction GetBidById(int auctionId);
     }
 }

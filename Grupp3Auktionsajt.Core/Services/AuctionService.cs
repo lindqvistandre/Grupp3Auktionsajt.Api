@@ -20,9 +20,23 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo = repo;
         }
 
-        public void DeleteAuction(int auctionID)
+        public bool DeleteAuction(int userId, int auctionID)
         {
-            _repo.DeleteAuction(auctionID);
+            var auction = _repo.GetBidById(auctionID);
+
+            
+            if (auction != null && auction.CreatorUserId == userId)
+            {
+                // Proceed with deleting the bid if the user is the owner
+                _repo.DeleteAuction(auctionID);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
         }
 
         public void CreateAuction(CreateAuctionDTO auctionDTO, int UserId) // Correct
