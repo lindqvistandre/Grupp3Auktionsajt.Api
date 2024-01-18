@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Grupp3Auktionsajt.Data.Interfaces;
 using Grupp3Auktionsajt.Domain.Models.DTO;
 using Grupp3Auktionsajt.Domain.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Grupp3Auktionsajt.Data.Repos
 {
-    public class UserRepo
+    public class UserRepo : IUserRepo
     {
         private readonly DBContext _context;
 

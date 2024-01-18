@@ -9,8 +9,8 @@ namespace Grupp3Auktionsajt.Data.Interfaces
 {
     public interface IUserRepo // Correct, Kevin
     {
-        int UserLogin(LoginDTO LoginDTO);
-        void CreateUser(CreateUserDTO createUserDTO);
-        void UpdateUser(int customerId, UpdateUserDTO updateUserDTO);
+        void CreateUser(string username, string password);
+        void UpdateUser(string username, string password);
+        void UserLogin(string username, string password);
     }
 }
