@@ -23,6 +23,10 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton<IDBContext, DBContext>();
 builder.Services.AddScoped<IAuctionService, AuctionService>();
 builder.Services.AddScoped<IAuctionRepo, AuctionRepo>();
+builder.Services.AddScoped<IBidService, BidService>();
+builder.Services.AddScoped<IBidRepo, BidRepo>();
+//builder.Services.AddScoped<IUserService, BidService>();
+//builder.Services.AddScoped<IUserRepo, UserRepo>();
 
 
 // Authentication

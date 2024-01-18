@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Grupp3Auktionsajt.Data.Interfaces;
 using Grupp3Auktionsajt.Domain.Models.DTO;
 using Grupp3Auktionsajt.Domain.Models.Entities;
 using Microsoft.Data.SqlClient;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Grupp3Auktionsajt.Data.Repos
 {
-    public class BidRepo
+    public class BidRepo : IBidRepo
     {
         private readonly DBContext _context;
 
@@ -25,7 +26,21 @@ namespace Grupp3Auktionsajt.Data.Repos
         {
             using (var db = _context.GetConnection())
             {
-                return db.Query<Bid>("sp_GetBidsForAuction", new { AuctionId = auctionId }, commandType: CommandType.StoredProcedure).ToList();
+                var parameters = new DynamicParameters();
+                parameters.Add("@AuctionId", auctionId);
+
+                return db.Query<Bid>("sp_GetBidsForAuction", parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+
+        public Bid GetBidById(int bidId)        // Perhaps don't have stored procedure for this one
+        {
+            using (var db = _context.GetConnection())
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@BidId", bidId);
+
+                return db.Query<Bid>("sp_GetBidById", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
 

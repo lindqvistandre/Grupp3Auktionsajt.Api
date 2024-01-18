@@ -77,6 +77,16 @@ BEGIN
     ORDER BY b.BidPrice DESC;
 END;
 
+-- Get information of a specific Bid
+create procedure sp_GetBidById
+    @BidId int
+as
+begin
+    select *
+    from Bids b
+    where b.BidId = @BidId
+end;
+
 
 -- stored procedure för create bid --               -- Correct, Kevin
 
