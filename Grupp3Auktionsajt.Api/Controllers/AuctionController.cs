@@ -46,7 +46,7 @@ namespace Grupp3Auktionsajt.Api.Controllers
                 var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
                 // Create the auction
-                _service.CreateAuction(auctionDTO, userId);
+                _service.CreateAuction(userId, auctionDTO);
 
                 return StatusCode(StatusCodes.Status201Created, "Auction created successfully");
             }
