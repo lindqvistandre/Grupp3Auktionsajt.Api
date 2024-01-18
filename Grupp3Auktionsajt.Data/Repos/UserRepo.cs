@@ -50,5 +50,18 @@ namespace Grupp3Auktionsajt.Data.Repos
                 db.Execute("sp_UpdateUser", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        // UserLogin
+        public void UserLogin(string username, string password)
+        {
+            using (var db = _context.GetConnection())
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@UserName", username);
+                parameters.Add("@Password", password);
+                var user = db.Execute("sp_UserLogin", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
     }
 }
