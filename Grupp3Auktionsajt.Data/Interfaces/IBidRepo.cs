@@ -16,5 +16,7 @@ namespace Grupp3Auktionsajt.Data.Interfaces
 
         // Metod för att hämta alla bud för en specifik auktion
         List<Bid> GetBidsForAuction(int auctionId);
+
+        Bid GetBidById(int bidId);
     }
 }

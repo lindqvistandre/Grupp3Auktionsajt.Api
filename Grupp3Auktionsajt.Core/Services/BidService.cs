@@ -1,6 +1,8 @@
 ﻿using Grupp3Auktionsajt.Core.Interfaces;
 using Grupp3Auktionsajt.Data.Interfaces;
 using Grupp3Auktionsajt.Domain.Models.DTO;
+using Grupp3Auktionsajt.Domain.Models.Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,18 +20,23 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo = repo;
         }
 
-        public bool DeleteBid(int userId, int bidID)        // Liknar hur ni ska göra i "DeleteAuction"
+        public bool DeleteBid(int userID, int bidID)        // Liknar hur ni ska göra i "DeleteAuction"
         {
-            /// You need check If the user who made the Bid deletes it.
-            
-            // 1. call a stored procedure that gets the Bid you want to delete based on BidId
-            // 2. check if userId of the user who tries to delete the bid matches the userId of the one who made the bid.
+            // 1. Call a stored procedure to get the bid based on BidId
+            var bid = _repo.GetBidById(bidID);
 
+            // 2. Check if the userId of the user who tries to delete the bid matches the userId of the one who made the bid
+            if (bid != null && bid.UserId == userID)
+            {
+                // Proceed with deleting the bid if the user is the owner
+                _repo.DeleteBid(bidID);
 
-            // check that you can't delete a bid after an auction is over
-
-            
-            _repo.DeleteBid(bidID);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void CreateBid(int userId, CreateBidDto createBidDto) // Correct
