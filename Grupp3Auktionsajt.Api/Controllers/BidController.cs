@@ -27,7 +27,7 @@ namespace Grupp3Auktionsajt.Api.Controllers
 
         [HttpPost("{bidId}")]
         [Authorize(Roles = "User")]
-        public IActionResult DeleteBid(int bidId)
+        public IActionResult DeleteBid(int bidId)           // Liknar hur ni ska göra i "DeleteAuction"     // DeleteBid men har inte fixat service metoden för den än
         {
 
             try
@@ -35,8 +35,18 @@ namespace Grupp3Auktionsajt.Api.Controllers
                 // Get User ID from the claims
                 var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
-                _service.DeleteBid(userId, bidId);
-                return Ok();
+                // try deleting the bid
+                var deleteBid = _service.DeleteBid(userId, bidId);
+
+                if(deleteBid == true)
+                {
+                    return Ok("Delete successful");
+                }
+                else
+                {
+                    return BadRequest("Couldn't delete the bid");
+                }
+
             }
             catch (Exception ex)
             {
@@ -47,12 +57,14 @@ namespace Grupp3Auktionsajt.Api.Controllers
 
         [HttpPost]
         [Authorize(Roles = "User")]
-        public IActionResult CreateBid([FromBody] CreateBidDto createBidDto)
+        public IActionResult CreateBid([FromBody] CreateBidDto createBidDto) // Correct
         {
             try
             {
-                var bid = _mapper.Map<Bid>(createBidDto); // Mappar från CreateBidDto till Bid
-                _service.CreateBid(bid);
+                // Get user ID from claims
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+                _service.CreateBid(userId, createBidDto);
                 return Ok();
             }
             catch (Exception ex)

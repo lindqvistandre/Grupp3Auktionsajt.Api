@@ -18,7 +18,7 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo = repo;
         }
 
-        public void DeleteBid(int userId, int bidID)
+        public bool DeleteBid(int userId, int bidID)        // Liknar hur ni ska göra i "DeleteAuction"
         {
             /// You need check If the user who made the Bid deletes it.
             
@@ -32,9 +32,9 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo.DeleteBid(bidID);
         }
 
-        public void CreateBid(CreateBidDto createBidDto)
+        public void CreateBid(int userId, CreateBidDto createBidDto) // Correct
         {
-            _repo.CreateBid(createBidDto);
+            _repo.CreateBid(userId, createBidDto);
         }
     }
 }

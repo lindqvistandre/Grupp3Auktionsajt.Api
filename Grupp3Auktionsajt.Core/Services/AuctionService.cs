@@ -25,7 +25,7 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo.DeleteAuction(auctionID);
         }
 
-        public void CreateAuction(CreateAuctionDTO auctionDTO, int UserId)
+        public void CreateAuction(CreateAuctionDTO auctionDTO, int UserId) // Correct
         {
             _repo.CreateAuction(auctionDTO, UserId);
         }

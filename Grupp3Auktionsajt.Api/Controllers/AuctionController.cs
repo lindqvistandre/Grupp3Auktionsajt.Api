@@ -27,12 +27,18 @@ namespace Grupp3Auktionsajt.Api.Controllers
         [Authorize(Roles = "User")]
         public IActionResult DeleteAuction(int auctionId) 
         {
+            // Get user ID from claims
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+
             return Ok();
             
         }
+
+
         [HttpPost("create-auction")]
         [Authorize(Roles = "User")]
-        public IActionResult CreateAuction([FromBody] CreateAuctionDTO auctionDTO)
+        public IActionResult CreateAuction([FromBody] CreateAuctionDTO auctionDTO) // Correct
         {
             try
             {
@@ -46,9 +52,6 @@ namespace Grupp3Auktionsajt.Api.Controllers
             }
             catch (Exception ex)
             {
-                //// Log if any exceptions occur
-                //_logger.LogError(ex, "Error during auction creation");
-
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error during auction creation");
             }
         }
