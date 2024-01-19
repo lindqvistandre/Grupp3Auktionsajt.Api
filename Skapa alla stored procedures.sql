@@ -51,6 +51,18 @@ BEGIN
 END
 GO
 
+--Get user name 
+CREATE PROCEDURE sp_GetUserByUsername
+@Username NVARCHAR(50)
+
+AS
+BEGIN
+SELECT UserName
+FROM Users
+    WHERE Username = @Username
+END
+GO
+
 
 
 --------------------------------Bid table

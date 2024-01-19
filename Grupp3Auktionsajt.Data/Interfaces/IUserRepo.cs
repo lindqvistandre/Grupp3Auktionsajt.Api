@@ -1,4 +1,5 @@
 ﻿using Grupp3Auktionsajt.Domain.Models.DTO;
+using Grupp3Auktionsajt.Domain.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace Grupp3Auktionsajt.Data.Interfaces
         void CreateUser(string username, string password);
         void UpdateUser(string username, string password);
         void UserLogin(string username, string password);
+        User GetUserByUsername(string username);
+
     }
 }

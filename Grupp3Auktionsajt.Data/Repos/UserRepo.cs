@@ -64,5 +64,16 @@ namespace Grupp3Auktionsajt.Data.Repos
             }
         }
 
+        public User GetUserByUsername(string username)
+        {
+            using (var db = _context.GetConnection())
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@UserName", username);
+                return db.Query<User>("sp_GetUserByUsername", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                //
+            }
+        }
+
     }
 }

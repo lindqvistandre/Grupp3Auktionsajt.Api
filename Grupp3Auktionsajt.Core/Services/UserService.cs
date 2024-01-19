@@ -37,9 +37,26 @@ namespace Grupp3Auktionsajt.Core.Services
             }
         }
 
+        public bool UpdateUser(string username, string newPassword)
+        {
+            // Get the user by Username from the database through a _repo method
+            var existingUser = _repo.GetUserByUsername(username);
+
+            // Check if the user exists
+            if (existingUser != null)
+            {
+                // Update the user's password
+                _repo.UpdateUser(username, newPassword);
+                return true; // User successfully updated
+            }
+            else
+            {
+                return false; // User does not exist
+            }
+        }
 
 
-    
+
 
     }
 }
