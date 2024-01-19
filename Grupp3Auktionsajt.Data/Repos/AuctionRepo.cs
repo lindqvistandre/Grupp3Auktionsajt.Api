@@ -23,11 +23,12 @@ namespace Grupp3Auktionsajt.Data.Repos
             _context = context;
         }
 
-        public void CreateAuction(int UserId, CreateAuctionDTO auctionDTO)
+        public void CreateAuction(int UserId, CreateAuctionDTO auctionDTO) // Correct
         {
             using (var db = _context.GetConnection())
             {
                 var parameters = new DynamicParameters();
+                parameters.Add("@UserId", UserId);
                 parameters.Add("@Title", auctionDTO.Title);
                 parameters.Add("@Description", auctionDTO.Description);
                 parameters.Add("@Price", auctionDTO.Price);
@@ -75,16 +76,9 @@ namespace Grupp3Auktionsajt.Data.Repos
             }
         }
 
-        bool IAuctionRepo.DeleteAuction(int auctionID)
-        {
-            throw new NotImplementedException();
-        }
-
         public Auction GetBidById(int auctionId)
         {
             throw new NotImplementedException();
         }
-
-        // UpdateAuction
     }
 }

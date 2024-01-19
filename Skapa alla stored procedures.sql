@@ -90,9 +90,19 @@ BEGIN
 END;
 GO
 
+create procedure sp_GetBidById      -- Correct, Kevin
+    @BidId int
+as
+begin
+    select *
+    from Bids b
+    where BidId = @BidId
+end;
+go
+
 -- stored procedure för create bid --               -- Correct, Kevin
 
-CREATE PROCEDURE CreateBid
+CREATE PROCEDURE sp_CreateBid
     @AuctionId INT,
     @UserId INT,
     @BidPrice DECIMAL(18, 2)
@@ -161,7 +171,7 @@ end;
 GO
 -- senaste tillagt 19/1 -- 
 
-CREATE PROCEDURE sp_GetAuctionById
+CREATE PROCEDURE sp_GetAuctionById      -- Correct, Kevin
     @AuctionId INT
 AS
 BEGIN
@@ -170,9 +180,23 @@ BEGIN
     WHERE AuctionId = @AuctionId;
 END;
 GO
+
+---- Alternative version kevin (Will perhaps use this later)
+--create procedure sp_GetClosedAuctionDetails
+--    @AuctionId int
+--as
+--begin
+--    select 
+--        a.*,
+--        b.BidId,        -- The Bid ID of the winning bid
+--        b.UserId,       -- The User ID of the winning bidder
+--        b.BidPrice,     -- The price of the winning bid
+--        b.BidTimeStamp  -- The Time stamp of the winning bid
+
+
 -- --------------------
 
-CREATE PROCEDURE sp_GetHighestBidForAuction
+CREATE PROCEDURE sp_GetHighestBidForAuction         -- Correct, Kevin
     @AuctionId INT
 AS
 BEGIN

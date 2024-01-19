@@ -37,7 +37,7 @@ namespace Grupp3Auktionsajt.Core.Services
             }
         }
 
-        public bool UpdateUser(int userId, string username, string Password)
+        public bool UpdateUser(int userId, string username, string Password)        // Correct
         {
             // Get the user by Username from the database through a _repo method
             var existingUser = _repo.GetUserByUsername(username);
@@ -45,7 +45,7 @@ namespace Grupp3Auktionsajt.Core.Services
             // Check if the user exists
             if (existingUser != null)
             {
-                // Update the user's password
+                // Update the user's information (You can update one or multiple properties of the user object)
                 _repo.UpdateUser(userId, username, Password);
                 return true;
             }
@@ -53,6 +53,11 @@ namespace Grupp3Auktionsajt.Core.Services
             {
                 return false;
             }
+        }
+
+        public void DeleteUser(int userId)      // Correct
+        {
+            _repo.DeleteUser(userId);
         }
 
         public int SignIn(string username, string password)

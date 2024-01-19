@@ -25,13 +25,18 @@ namespace Grupp3Auktionsajt.Api.Controllers
 
         // Method for creating a user
         [HttpPost("create")]
-        [Authorize(Roles = "User")]
-        public IActionResult CreateUser([FromBody] CreateUserDTO createUserDto)
+        [AllowAnonymous]
+        public IActionResult CreateUser([FromBody] CreateUserDTO createUserDto)     // Correct
         {
             try
             {
-                _service.CreateUser(createUserDto.Username, createUserDto.Password);
-                return Ok("User created successfully.");
+                // Try creating the account
+                var result = _service.CreateUser(createUserDto.Username, createUserDto.Password);
+
+                if (result)
+                    return Ok("User created successfully.");
+                else
+                    return BadRequest("Username already taken");
             }
             catch (Exception ex)
             {
@@ -43,12 +48,14 @@ namespace Grupp3Auktionsajt.Api.Controllers
         // Method called UpdateUser
         [HttpPut("update")]
         [Authorize(Roles = "User")]
-        public IActionResult UpdateUser([FromBody] UpdateUserDTO updateUserDto)
+        public IActionResult UpdateUser([FromBody] UpdateUserDTO updateUserDto) // Correct
         {
             try
             {
+                // Get User ID from the claims
                 var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
+                // Try updating the user
                 var result = _service.UpdateUser(userId, updateUserDto.Username, updateUserDto.Password);
 
                 if (result)
@@ -67,21 +74,50 @@ namespace Grupp3Auktionsajt.Api.Controllers
             }
         }
 
-        // Method called LogIn
-        [HttpPost("login")]
-        [AllowAnonymous]
-        public IActionResult LogIn([FromBody] LoginDTO userLoginDto)
+        // Delete a User
+        [HttpDelete("delete/{deleteUserId}")]
+        [Authorize(Roles = "User")]
+        public IActionResult DeleteUser(int deleteUserId)   // Correct
         {
             try
             {
+                // Get User ID from the claims
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+                if (userId != deleteUserId)
+                {
+                    return BadRequest("Not authorized or User does not not exist. User could not be deleted");
+                }
+                else
+                {
+                    // Proceed to delete the user
+                    _service.DeleteUser(userId);
+                    return Ok("User Deleted");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during deletion.");
+                return StatusCode(500, "An error occurred while attempting to delete a user.");
+            }
+        }
+
+        // Method called LogIn
+        [HttpPost("login")]
+        [AllowAnonymous]
+        public IActionResult LogIn([FromBody] LoginDTO userLoginDto) // Correct
+        {
+            try
+            {
+                // Try signing in
                 var userId = _service.SignIn(userLoginDto.Username, userLoginDto.Password);
 
-                if (userId > 0)
+                if (userId > 0) // Valid credentials
                 {
                     string token = _service.GenerateJwtToken(userId);
                     return Ok(new { Token = token });
                 }
-                else
+                else // Invalid credentials
                 {
                     return Unauthorized("Invalid username or password.");
                 }

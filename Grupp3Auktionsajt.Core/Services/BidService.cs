@@ -21,7 +21,7 @@ namespace Grupp3Auktionsajt.Core.Services
         }
 
 
-        public bool DeleteBid(int userId, int bidId)        // Liknar hur ni ska göra i "DeleteAuction"
+        public bool DeleteBid(int userId, int bidId)
         {
             // 1. Call a stored procedure to get the bid based on BidId
             var bid = _repo.GetBidById(bidId);
@@ -93,7 +93,7 @@ namespace Grupp3Auktionsajt.Core.Services
                 return 3;
             }
 
-            // Skapa budet
+            // Create the bid
             _repo.CreateBid(userId, createBidDto);
             return 0;
             

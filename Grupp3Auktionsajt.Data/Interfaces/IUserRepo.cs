@@ -12,6 +12,7 @@ namespace Grupp3Auktionsajt.Data.Interfaces
     {
         void CreateUser(string username, string password);
         void UpdateUser(int userId, string username, string password);
+        void DeleteUser(int userId);
         int UserLogin(string username, string password);
         User GetUserByUsername(string username);
 

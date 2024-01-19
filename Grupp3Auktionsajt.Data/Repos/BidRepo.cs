@@ -69,7 +69,7 @@ namespace Grupp3Auktionsajt.Data.Repos
             }
         }
 
-        public Auction GetAuctionById(int auctionId)
+        public Auction GetAuctionById(int auctionId)    // Seems to be in the wrong place
         {
             using (var db = _context.GetConnection())
             {

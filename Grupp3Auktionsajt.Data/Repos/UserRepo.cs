@@ -22,11 +22,6 @@ namespace Grupp3Auktionsajt.Data.Repos
             _context = context;
         }
 
-        // Methods for the following 3 classes needs to be made, Kevin
-
-        // UserLogin
-
-
         // CreateUser
         public void CreateUser(string username, string password)
         {
@@ -50,6 +45,17 @@ namespace Grupp3Auktionsajt.Data.Repos
                 parameters.Add("@UserName", username);
                 parameters.Add("@Password", password);
                 db.Execute("sp_UpdateUser", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        // DeleteUser
+        public void DeleteUser(int userId)
+        {
+            using(var db = _context.GetConnection())
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@UserId", userId);
+                db.Execute("sp_DeleteUser", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
