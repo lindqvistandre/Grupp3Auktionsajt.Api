@@ -20,16 +20,17 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo = repo;
         }
 
-        public bool DeleteBid(int userID, int bidID)        // Liknar hur ni ska göra i "DeleteAuction"
+
+        public bool DeleteBid(int userId, int bidId)        // Liknar hur ni ska göra i "DeleteAuction"
         {
             // 1. Call a stored procedure to get the bid based on BidId
-            var bid = _repo.GetBidById(bidID);
+            var bid = _repo.GetBidById(bidId);
 
             // 2. Check if the userId of the user who tries to delete the bid matches the userId of the one who made the bid
-            if (bid != null && bid.UserId == userID)
+            if (bid != null && bid.UserId == userId)
             {
                 // Proceed with deleting the bid if the user is the owner
-                _repo.DeleteBid(bidID);
+                _repo.DeleteBid(bidId);
 
                 return true;
             }
@@ -38,6 +39,12 @@ namespace Grupp3Auktionsajt.Core.Services
                 return false;
             }
         }
+
+        public List<Bid> GetBidsForAuction(int auctionId)
+        {
+            return _repo.GetBidsForAuction(auctionId);
+        }
+
 
         public void CreateBid(int userId, CreateBidDto createBidDto) // Correct
         {

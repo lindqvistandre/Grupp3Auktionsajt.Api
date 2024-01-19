@@ -10,8 +10,8 @@ namespace Grupp3Auktionsajt.Core.Interfaces
 {
     public interface IAuctionService
     {
-        void DeleteAuction(int auctionID);
-        void CreateAuction(CreateAuctionDTO auctionDTO, int UserId);
+        bool DeleteAuction(int userId, int auctionId);
+        void CreateAuction(int UserId, CreateAuctionDTO auctionDTO);
        
     }
 }

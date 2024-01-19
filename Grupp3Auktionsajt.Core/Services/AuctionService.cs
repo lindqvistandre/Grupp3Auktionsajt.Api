@@ -20,15 +20,15 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo = repo;
         }
 
-        public bool DeleteAuction(int userId, int auctionID)
+        public bool DeleteAuction(int userId, int auctionId)
         {
-            var auction = _repo.GetBidById(auctionID);
+            var auction = _repo.GetBidById(auctionId);
 
             
             if (auction != null && auction.CreatorUserId == userId)
             {
                 // Proceed with deleting the bid if the user is the owner
-                _repo.DeleteAuction(auctionID);
+                _repo.DeleteAuction(auctionId);
 
                 return true;
             }
@@ -39,9 +39,9 @@ namespace Grupp3Auktionsajt.Core.Services
             
         }
 
-        public void CreateAuction(CreateAuctionDTO auctionDTO, int UserId) // Correct
+        public void CreateAuction(int UserId, CreateAuctionDTO auctionDTO) // Correct
         {
-            _repo.CreateAuction(auctionDTO, UserId);
+            _repo.CreateAuction(UserId, auctionDTO);
         }
     }
 

@@ -10,7 +10,8 @@ namespace Grupp3Auktionsajt.Core.Interfaces
 {
     public interface IBidService
     {
-        void DeleteBid(int userId, int bidId);
+        bool DeleteBid(int userId, int bidId);
+
         // Metod för att skapa ett nytt bud
         void CreateBid(int UserId, CreateBidDto createBidDto);
 
