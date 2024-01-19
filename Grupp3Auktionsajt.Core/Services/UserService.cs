@@ -19,36 +19,34 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo = repo;
         }
 
-        // Method for signing in
-
-        // Method for Creating a user
-
-        // Method for Updating a user
-
-        //...
-
-
-
-        // Generate a temporary 180 min token
-        public string GenerateJwtToken(int customerId)              // Correct, Kevin
+        public bool CreateUser(string username, string password)
         {
-            var claims = new List<Claim>
+
+            // Get user by Username from the database through a _repo nethod and save it in a variable
+            var existingUser = _repo.GetUserByUsername(username);
+
+            if (existingUser == null)
             {
-                new Claim(ClaimTypes.NameIdentifier, customerId.ToString()), // User ID claim
-                new Claim(ClaimTypes.Role, "User") // Role claim
-            };
+                _repo.CreateUser(username, password);
+                return true;
+            }
 
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysecretKey12345!#12345555555555555555"));
-            var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-
-            var tokenOptions = new JwtSecurityToken(
-                issuer: "http://localhost:5265",
-                audience: "http://localhost:5265",
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(180),
-                signingCredentials: signinCredentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+            else
+            {
+                return false;
+            }
         }
+
+
+
+    
+
     }
 }
+
+// Method for signing in
+
+// 1.Method for Creating a user
+
+// Method for Updating a user
+
