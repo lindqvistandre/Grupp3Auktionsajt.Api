@@ -46,29 +46,57 @@ namespace Grupp3Auktionsajt.Core.Services
         }
 
 
-        public void CreateBid(int userId, CreateBidDto createBidDto) // Correct
+        //public void CreateBid(int userId, CreateBidDto createBidDto) // Correct
+        //{
+        //    var auction = _repo.GetAuctionById(createBidDto.AuctionId);
+        //    if (auction == null || auction.EndDate <= DateTime.Now)
+        //    {
+        //        throw new InvalidOperationException("Auction isn't open anymore for bids");
+        //    }
+
+        //    // Checking if auction isnt created by user.
+        //    if (auction.CreatorUserId == userId)
+        //    {
+        //        throw new InvalidOperationException("You cant bid on your own auction.");
+        //    }
+
+        //    // Check if bid is higher then new one.
+        //    var highestBid = _repo.GetHighestBidForAuction(createBidDto.AuctionId);
+        //    if (highestBid != null && createBidDto.BidPrice <= highestBid.BidPrice)
+        //    {
+        //        throw new InvalidOperationException("Bid must be higher then previous bid.");
+        //    }
+
+        //    // Skapa budet
+        //    _repo.CreateBid(userId, createBidDto);
+        //}
+
+
+        public bool CreateBid(int userId, CreateBidDto createBidDto) // Correct
         {
             var auction = _repo.GetAuctionById(createBidDto.AuctionId);
             if (auction == null || auction.EndDate <= DateTime.Now)
             {
-                throw new InvalidOperationException("Auction isn't open anymore for bids");
+                return false;
             }
 
             // Checking if auction isnt created by user.
             if (auction.CreatorUserId == userId)
             {
-                throw new InvalidOperationException("You cant bid on your own auction.");
+                return false;
             }
 
             // Check if bid is higher then new one.
             var highestBid = _repo.GetHighestBidForAuction(createBidDto.AuctionId);
             if (highestBid != null && createBidDto.BidPrice <= highestBid.BidPrice)
             {
-                throw new InvalidOperationException("Bid must be higher then previous bid.");
+                return false;
             }
 
             // Skapa budet
             _repo.CreateBid(userId, createBidDto);
+            return true;
+            
         }
 
     }

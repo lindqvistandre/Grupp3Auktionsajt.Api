@@ -65,8 +65,16 @@ namespace Grupp3Auktionsajt.Api.Controllers
                 // Get user ID from claims
                 var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
-                _service.CreateBid(userId, createBidDto);
-                return Ok();
+                var createBid = _service.CreateBid(userId, createBidDto);
+                
+                if(createBid == true)
+                {
+                    return Ok("Successfully created the bid");
+                }
+                else
+                {
+                    return BadRequest("Couldn't create the bid");
+                }
             }
             catch (Exception ex)
             {

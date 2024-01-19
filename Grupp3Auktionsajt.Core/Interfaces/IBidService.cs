@@ -13,7 +13,7 @@ namespace Grupp3Auktionsajt.Core.Interfaces
         bool DeleteBid(int userId, int bidId);
 
         // Metod för att skapa ett nytt bud
-        void CreateBid(int UserId, CreateBidDto createBidDto);
+        bool CreateBid(int userId, CreateBidDto createBidDto);
 
         // Metod för att hämta alla bud för en specifik auktion
         List<Bid> GetBidsForAuction(int auctionId);
