@@ -35,13 +35,17 @@ namespace Grupp3Auktionsajt.Core.Services
             else
             {
                 return false;
-            }
-            
+            } 
         }
 
         public void CreateAuction(int UserId, CreateAuctionDTO auctionDTO) // Correct
         {
             _repo.CreateAuction(UserId, auctionDTO);
+        }
+
+        public IEnumerable<Auction> SearchAuction(string keyword)
+        {
+            return _repo.SearchAuctions(keyword);
         }
     }
 

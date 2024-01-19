@@ -73,5 +73,26 @@ namespace Grupp3Auktionsajt.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error during auction creation");
             }
         }
+
+        [HttpGet("Search")]
+        [AllowAnonymous]
+        public IActionResult SearchAuction([FromQuery] string keyword)
+        {
+            try
+            {
+                // Get a list of the search result
+                var auctions = _service.SearchAuction(keyword);
+
+                // Map the entities to DTOs
+                var SearchAuctionDTOs = _mapper.Map<IEnumerable<SearchAuctionDTO>>(auctions);
+                
+                return Ok(SearchAuctionDTOs);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error couldn't search auctions");
+            }
+        }
     }
 }

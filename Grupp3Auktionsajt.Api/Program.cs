@@ -25,7 +25,7 @@ builder.Services.AddScoped<IAuctionService, AuctionService>();
 builder.Services.AddScoped<IAuctionRepo, AuctionRepo>();
 builder.Services.AddScoped<IBidService, BidService>();
 builder.Services.AddScoped<IBidRepo, BidRepo>();
-//builder.Services.AddScoped<IUserService, BidService>();
+//builder.Services.AddScoped<IUserService, UserService>();
 //builder.Services.AddScoped<IUserRepo, UserRepo>();
 
 
@@ -52,7 +52,8 @@ builder.Services.AddAuthentication(opt =>
 // Automapper
 builder.Services.AddAutoMapper(
     typeof(Program).Assembly,
-    typeof(GetBidsForAuctionProfile).Assembly);
+    typeof(GetBidsForAuctionProfile).Assembly,
+    typeof(SearchAuctionsProfile).Assembly);
 
 
 var app = builder.Build();
