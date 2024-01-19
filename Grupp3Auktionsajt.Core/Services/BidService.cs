@@ -71,10 +71,5 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo.CreateBid(userId, createBidDto);
         }
 
-
-        public List<Bid> GetBidsForAuction(int auctionId)
-        {
-            return _repo.GetBidsForAuction(auctionId);
-        }
     }
 }
