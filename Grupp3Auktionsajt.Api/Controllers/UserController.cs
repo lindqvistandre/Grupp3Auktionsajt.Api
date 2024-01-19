@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Grupp3Auktionsajt.Core.Interfaces;
 using Grupp3Auktionsajt.Domain.Models.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Grupp3Auktionsajt.Api.Controllers
 {
@@ -23,92 +25,72 @@ namespace Grupp3Auktionsajt.Api.Controllers
 
         // Method for creating a user
         [HttpPost("create")]
-        public ActionResult CreateUser([FromBody] CreateUserDto createUserDto)
+        [Authorize(Roles = "User")]
+        public IActionResult CreateUser([FromBody] CreateUserDTO createUserDto)
         {
             try
             {
-                // You might want to validate the DTO here before proceeding
-
-                _service.CreateNewUser(createUserDto.Username, createUserDto.Password);
-
-                // If the creation is successful, return a success response
+                _service.CreateUser(createUserDto.Username, createUserDto.Password);
                 return Ok("User created successfully.");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error creating user");
-
-                // If there's an error, return an appropriate response
                 return StatusCode(500, "An error occurred while creating the user.");
             }
         }
 
         // Method called UpdateUser
-        [HttpPut("update/{userId}")]
-        public ActionResult UpdateUser(int userId, [FromBody] UpdateUserDto updateUserDto)
+        [HttpPut("update")]
+        [Authorize(Roles = "User")]
+        public IActionResult UpdateUser([FromBody] UpdateUserDTO updateUserDto)
         {
             try
             {
-                // You might want to validate the DTO here before proceeding
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
-                var result = _service.UpdateExistingUser(userId, updateUserDto.NewUsername, updateUserDto.NewPassword);
+                var result = _service.UpdateUser(userId, updateUserDto.Username, updateUserDto.Password);
 
                 if (result)
                 {
-                    // If the update is successful, return a success response
                     return Ok("User updated successfully.");
                 }
                 else
                 {
-                    // If the update is not successful, handle accordingly
                     return BadRequest("User could not be updated.");
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error updating user");
-
-                // If there's an error, return an appropriate response
                 return StatusCode(500, "An error occurred while updating the user.");
             }
         }
 
         // Method called LogIn
         [HttpPost("login")]
-        public ActionResult<UserDto> LogIn([FromBody] UserLoginDto userLoginDto)
+        [AllowAnonymous]
+        public IActionResult LogIn([FromBody] LoginDTO userLoginDto)
         {
             try
             {
-                // You might want to validate the DTO here before proceeding
+                var userId = _service.SignIn(userLoginDto.Username, userLoginDto.Password);
 
-                var userDto = _service.SignInUser(userLoginDto.Username, userLoginDto.Password);
-
-                if (userDto != null)
+                if (userId > 0)
                 {
-                    // If the sign in is successful, return the user data (consider what data should be returned)
-                    return Ok(userDto);
+                    string token = _service.GenerateJwtToken(userId);
+                    return Ok(new { Token = token });
                 }
                 else
                 {
-                    // If the sign in is not successful, return an unauthorized response
                     return Unauthorized("Invalid username or password.");
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error during login.");
-
-                // If there's an error, return an appropriate response
                 return StatusCode(500, "An error occurred while attempting to log in.");
             }
         }
-
-
-
-        // Method called LogIn
-
-        //1. Method called CreateUser
-
-        // Method called UpdateUser
     }
 }

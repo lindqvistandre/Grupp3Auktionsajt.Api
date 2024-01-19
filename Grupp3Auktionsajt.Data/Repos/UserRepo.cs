@@ -41,11 +41,12 @@ namespace Grupp3Auktionsajt.Data.Repos
 
 
         // UpdateUser
-        public void UpdateUser(string username, string password)
+        public void UpdateUser(int userId, string username, string password)
         {
             using (var db = _context.GetConnection())
             {
                 var parameters = new DynamicParameters();
+                parameters.Add("@UserId", userId);
                 parameters.Add("@UserName", username);
                 parameters.Add("@Password", password);
                 db.Execute("sp_UpdateUser", parameters, commandType: CommandType.StoredProcedure);
@@ -53,14 +54,14 @@ namespace Grupp3Auktionsajt.Data.Repos
         }
 
         // UserLogin
-        public void UserLogin(string username, string password)
+        public int UserLogin(string username, string password)
         {
             using (var db = _context.GetConnection())
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@UserName", username);
                 parameters.Add("@Password", password);
-                var user = db.Execute("sp_UserLogin", parameters, commandType: CommandType.StoredProcedure);
+                return db.Query<int>("sp_UserLogin", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
 
@@ -71,7 +72,6 @@ namespace Grupp3Auktionsajt.Data.Repos
                 var parameters = new DynamicParameters();
                 parameters.Add("@UserName", username);
                 return db.Query<User>("sp_GetUserByUsername", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
-                //
             }
         }
 

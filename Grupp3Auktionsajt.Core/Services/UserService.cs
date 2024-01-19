@@ -37,7 +37,7 @@ namespace Grupp3Auktionsajt.Core.Services
             }
         }
 
-        public bool UpdateUser(string username, string newPassword)
+        public bool UpdateUser(int userId, string username, string Password)
         {
             // Get the user by Username from the database through a _repo method
             var existingUser = _repo.GetUserByUsername(username);
@@ -46,24 +46,44 @@ namespace Grupp3Auktionsajt.Core.Services
             if (existingUser != null)
             {
                 // Update the user's password
-                _repo.UpdateUser(username, newPassword);
-                return true; // User successfully updated
+                _repo.UpdateUser(userId, username, Password);
+                return true;
             }
             else
             {
-                return false; // User does not exist
+                return false;
             }
         }
 
+        public int SignIn(string username, string password)
+        {
+            return _repo.UserLogin(username, password);
+        }
 
 
+        // Generate a temporary 180 min token
+        public string GenerateJwtToken(int userId)      // Correct
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()), // User ID claim
+                new Claim(ClaimTypes.Role, "Customer") // Role claim
+            };
 
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysecretKey12345!#12345555555555555555")); // Probably need to use a secure method to store and retrieve the key
+            var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+            var tokenOptions = new JwtSecurityToken(
+                issuer: "http://localhost:5265",
+                audience: "http://localhost:5265",
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(180),
+                signingCredentials: signinCredentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+        }
     }
 }
 
 // Method for signing in
-
-// 1.Method for Creating a user
-
-// Method for Updating a user
 

@@ -11,8 +11,8 @@ namespace Grupp3Auktionsajt.Data.Interfaces
     public interface IUserRepo // Correct, Kevin
     {
         void CreateUser(string username, string password);
-        void UpdateUser(string username, string password);
-        void UserLogin(string username, string password);
+        void UpdateUser(int userId, string username, string password);
+        int UserLogin(string username, string password);
         User GetUserByUsername(string username);
 
     }
