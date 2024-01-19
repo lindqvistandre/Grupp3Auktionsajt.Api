@@ -42,15 +42,10 @@ namespace Grupp3Auktionsajt.Api.Controllers
                 {
                     return Ok("Delete auction successful");
                 }
-                else if(deleteBid == false)
+                else 
                 {
                     return BadRequest("Couldn't delete the bid");
                 }
-                else
-                {
-                    return BadRequest("Couldn't delete the bid");
-                }
-
             }
             catch (Exception ex)
             {
@@ -83,9 +78,7 @@ namespace Grupp3Auktionsajt.Api.Controllers
                 else if (createBid == 3)
                     return BadRequest("Bid must be higher then previous bid.");
                 else
-                {
                     return BadRequest("Couldn't create the bid");
-                }
             }
             catch (Exception ex)
             {
