@@ -42,6 +42,10 @@ namespace Grupp3Auktionsajt.Api.Controllers
                 {
                     return Ok("Delete auction successful");
                 }
+                else if(deleteBid == false)
+                {
+                    return BadRequest("Couldn't delete the bid");
+                }
                 else
                 {
                     return BadRequest("Couldn't delete the bid");
@@ -67,10 +71,17 @@ namespace Grupp3Auktionsajt.Api.Controllers
 
                 var createBid = _service.CreateBid(userId, createBidDto);
                 
-                if(createBid == true)
-                {
+                if(createBid == 0)
                     return Ok("Successfully created the bid");
-                }
+
+                else if (createBid == 1)
+                    return BadRequest("Auction isn't open anymore for bids");
+
+                else if (createBid == 2)
+                    return BadRequest("You cant bid on your own auction.");
+
+                else if (createBid == 3)
+                    return BadRequest("Bid must be higher then previous bid.");
                 else
                 {
                     return BadRequest("Couldn't create the bid");

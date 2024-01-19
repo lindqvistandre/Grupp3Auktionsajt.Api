@@ -72,30 +72,30 @@ namespace Grupp3Auktionsajt.Core.Services
         //}
 
 
-        public bool CreateBid(int userId, CreateBidDto createBidDto) // Correct
+        public int CreateBid(int userId, CreateBidDto createBidDto) // Correct
         {
             var auction = _repo.GetAuctionById(createBidDto.AuctionId);
             if (auction == null || auction.EndDate <= DateTime.Now)
             {
-                return false;
+                return 1;
             }
 
             // Checking if auction isnt created by user.
             if (auction.CreatorUserId == userId)
             {
-                return false;
+                return 2;
             }
 
             // Check if bid is higher then new one.
             var highestBid = _repo.GetHighestBidForAuction(createBidDto.AuctionId);
             if (highestBid != null && createBidDto.BidPrice <= highestBid.BidPrice)
             {
-                return false;
+                return 3;
             }
 
             // Skapa budet
             _repo.CreateBid(userId, createBidDto);
-            return true;
+            return 0;
             
         }
 
