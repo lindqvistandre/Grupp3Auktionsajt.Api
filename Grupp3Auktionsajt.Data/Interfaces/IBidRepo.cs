@@ -18,5 +18,7 @@ namespace Grupp3Auktionsajt.Data.Interfaces
         List<Bid> GetBidsForAuction(int auctionId);
 
         Bid GetBidById(int bidId);
+        Bid GetHighestBidForAuction(int auctionId);
+        Auction GetAuctionById(int auctionId);
     }
 }

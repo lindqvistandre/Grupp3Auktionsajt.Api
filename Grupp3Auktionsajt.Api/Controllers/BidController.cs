@@ -81,7 +81,7 @@ namespace Grupp3Auktionsajt.Api.Controllers
             try
             {
                 var bids = _service.GetBidsForAuction(auctionId);
-                var bidDtos = _mapper.Map<List<BidDTO>>(bids); // Antag att detta mappar från Bid till BidDto
+                var bidDtos = _mapper.Map<List<BidDTO>>(bids);
                 return Ok(bidDtos);
             }
             catch (Exception ex)

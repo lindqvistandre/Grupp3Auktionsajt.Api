@@ -20,7 +20,7 @@ BEGIN
     INSERT INTO Users (UserName, Password)
     VALUES (@UserName, @Password);
 END
-
+GO
 -- Update för User 
 CREATE PROCEDURE sp_UpdateUser
     @UserID INT,
@@ -64,7 +64,7 @@ Delete
 From Bids
 Where BidId = @DeleteByID
 End;
-
+GO
 
 -- stored procedure för lista bid -- 
 CREATE PROCEDURE sp_GetBidsForAuction       -- Probably correct, but this will work, Kevin
@@ -76,7 +76,7 @@ BEGIN
     WHERE b.AuctionId = @AuctionId
     ORDER BY b.BidPrice DESC;
 END;
-
+GO
 
 -- stored procedure för create bid --               -- Correct, Kevin
 
@@ -89,7 +89,7 @@ BEGIN
     INSERT INTO Bids (AuctionId, UserId, BidPrice)
     VALUES (@AuctionId, @UserId, @BidPrice);
 END;    
-
+GO
 
 -------------------------------Auction table
 
@@ -108,7 +108,7 @@ begin
 	insert into Auctions (Title, Description, Price, StartDate, EndDate, CreatorUserId)
 	values (@Title, @Description, @Price, @StartDate, @EndDate, @CreatorUserId);
 end;
-
+GO
 
 
 Create procedure sp_DeleteAuction(@DeleteByID int)
@@ -118,7 +118,7 @@ Delete
 From Auctions
 Where AuctionID = @DeleteByID
 End;
-
+GO
 
 
 
@@ -146,9 +146,26 @@ begin
 	from Auctions
 	where Title like @SearchTerm
 end;
+GO
+-- senaste tillagt 19/1 -- 
 
+CREATE PROCEDURE sp_GetAuctionById
+    @AuctionId INT
+AS
+BEGIN
+    SELECT AuctionId, Title, Description, Price, StartDate, EndDate, CreatorUserId
+    FROM Auctions
+    WHERE AuctionId = @AuctionId;
+END;
+GO
+-- --------------------
 
-
-
-
-
+CREATE PROCEDURE sp_GetHighestBidForAuction
+    @AuctionId INT
+AS
+BEGIN
+    SELECT TOP 1 BidId, UserId, BidPrice, BidTimeStamp
+    FROM Bids
+    WHERE AuctionId = @AuctionId
+    ORDER BY BidPrice DESC;
+END;

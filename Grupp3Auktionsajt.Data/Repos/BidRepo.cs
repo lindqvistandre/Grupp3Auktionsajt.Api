@@ -53,6 +53,22 @@ namespace Grupp3Auktionsajt.Data.Repos
                 db.Execute("sp.DeleteBid", parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public Auction GetAuctionById(int auctionId)
+        {
+            using (var db = _context.GetConnection())
+            {
+                return db.QueryFirstOrDefault<Auction>("sp_GetAuctionById", new { AuctionId = auctionId }, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public Bid GetHighestBidForAuction(int auctionId)
+        {
+            using (var db = _context.GetConnection())
+            {
+                return db.QueryFirstOrDefault<Bid>("sp_GetHighestBidForAuction", new { AuctionId = auctionId }, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
 
