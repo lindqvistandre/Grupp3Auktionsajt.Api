@@ -17,9 +17,9 @@ namespace Grupp3Auktionsajt.Data.Repos
     public class AuctionRepo : IAuctionRepo
     {
 
-        private readonly DBContext _context;
+        private readonly IDBContext _context;
 
-        public AuctionRepo(DBContext context)
+        public AuctionRepo(IDBContext context)
         {
             _context = context;
         }
@@ -29,7 +29,7 @@ namespace Grupp3Auktionsajt.Data.Repos
             using (var db = _context.GetConnection())
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@UserId", UserId);
+                parameters.Add("@CreatorUserId", UserId);
                 parameters.Add("@Title", auctionDTO.Title);
                 parameters.Add("@Description", auctionDTO.Description);
                 parameters.Add("@Price", auctionDTO.Price);
@@ -116,9 +116,9 @@ namespace Grupp3Auktionsajt.Data.Repos
             }
         }
 
-        public Auction GetBidById(int auctionId) // This is in the wrong place
-        {
-            throw new NotImplementedException();
-        }
+        //public Auction GetBidById(int auctionId) // This is in the wrong place
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

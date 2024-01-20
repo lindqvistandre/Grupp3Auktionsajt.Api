@@ -15,9 +15,9 @@ namespace Grupp3Auktionsajt.Data.Repos
 {
     public class UserRepo : IUserRepo
     {
-        private readonly DBContext _context;
+        private readonly IDBContext _context;
 
-        public UserRepo(DBContext context)
+        public UserRepo(IDBContext context)
         {
             _context = context;
         }

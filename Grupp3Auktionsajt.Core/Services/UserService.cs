@@ -1,4 +1,5 @@
-﻿using Grupp3Auktionsajt.Data.Interfaces;
+﻿using Grupp3Auktionsajt.Core.Interfaces;
+using Grupp3Auktionsajt.Data.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Grupp3Auktionsajt.Core.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IUserRepo _repo;
 
@@ -72,7 +73,7 @@ namespace Grupp3Auktionsajt.Core.Services
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, userId.ToString()), // User ID claim
-                new Claim(ClaimTypes.Role, "Customer") // Role claim
+                new Claim(ClaimTypes.Role, "User") // Role claim
             };
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysecretKey12345!#12345555555555555555")); // Probably need to use a secure method to store and retrieve the key

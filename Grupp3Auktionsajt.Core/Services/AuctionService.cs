@@ -20,23 +20,23 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo = repo;
         }
 
-        public bool DeleteAuction(int userId, int auctionId)
-        {
-            var auction = _repo.GetBidById(auctionId);
+        //public bool DeleteAuction(int userId, int auctionId)
+        //{
+        //    var auction = _repo.GetBidById(auctionId);
 
             
-            if (auction != null && auction.CreatorUserId == userId)
-            {
-                // Proceed with deleting the bid if the user is the owner
-                _repo.DeleteAuction(auctionId);
+        //    if (auction != null && auction.CreatorUserId == userId)
+        //    {
+        //        // Proceed with deleting the bid if the user is the owner
+        //        _repo.DeleteAuction(auctionId);
 
-                return true;
-            }
-            else
-            {
-                return false;
-            } 
-        }
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    } 
+        //}
 
         public void CreateAuction(int UserId, CreateAuctionDTO auctionDTO) // Correct
         {

@@ -25,33 +25,33 @@ namespace Grupp3Auktionsajt.Api.Controllers
         }
 
 
-        [HttpPost("{auctionId}")]
-        [Authorize(Roles = "User")]
-        public IActionResult DeleteAuction(int auctionId) 
-        {            
-            try
-            {
-                // Get User ID from the claims
-                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        //[HttpPost("{auctionId}")]
+        //[Authorize(Roles = "User")]
+        //public IActionResult DeleteAuction(int auctionId)         // Will test this later in postman
+        //{            
+        //    try
+        //    {
+        //        // Get User ID from the claims
+        //        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
-                // try deleting the auction
-                var deleteAuction = _service.DeleteAuction(userId, auctionId);
+        //        // try deleting the auction
+        //        var deleteAuction = _service.DeleteAuction(userId, auctionId);
 
-                if (deleteAuction == true)
-                {
-                    return Ok("Delete auction successful");
-                }
-                else
-                {
-                    return BadRequest("Couldn't delete the auction");
-                }
+        //        if (deleteAuction == true)
+        //        {
+        //            return Ok("Delete auction successful");
+        //        }
+        //        else
+        //        {
+        //            return BadRequest("Couldn't delete the auction");
+        //        }
 
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while  deleting the auction");
-            }      
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while  deleting the auction");
+        //    }      
+        //}
 
 
         [HttpPost("create-auction")]
@@ -70,11 +70,11 @@ namespace Grupp3Auktionsajt.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error during auction creation");
-            }
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error couldn't create the auction");
+            }  
         }
 
-        [HttpGet("Search")]
+        [HttpGet("search")]
         [AllowAnonymous]
         public IActionResult SearchAuction([FromQuery] string keyword) // (Kevin)
         {
@@ -97,6 +97,7 @@ namespace Grupp3Auktionsajt.Api.Controllers
 
         // GetAuctionDetails
         [HttpGet("{auctionId}")]
+        [AllowAnonymous]
         public IActionResult GetAuctionDetails(int auctionId) // (Kevin)
         {
             try

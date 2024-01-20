@@ -15,9 +15,9 @@ namespace Grupp3Auktionsajt.Data.Repos
 {
     public class BidRepo : IBidRepo
     {
-        private readonly DBContext _context;
+        private readonly IDBContext _context;
 
-        public BidRepo(DBContext context)
+        public BidRepo(IDBContext context)
         {
             _context = context;
         }

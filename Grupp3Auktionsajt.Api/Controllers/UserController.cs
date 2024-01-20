@@ -103,7 +103,7 @@ namespace Grupp3Auktionsajt.Api.Controllers
         }
 
         // Method called LogIn
-        [HttpPost("login")]
+        [HttpGet("login")]
         [AllowAnonymous]
         public IActionResult LogIn([FromBody] LoginDTO userLoginDto) // Correct
         {
