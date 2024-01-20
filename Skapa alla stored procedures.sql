@@ -91,7 +91,7 @@ END;
 GO
 
 create procedure sp_GetBidById      -- Correct, Kevin
-    @BidId int
+    @BidId int                      --(Kevin)
 as
 begin
     select *
@@ -116,7 +116,7 @@ GO
 -------------------------------Auction table
 
 -- Create an auction            -- Correct, Kevin
-create procedure sp_CreateAuction
+create procedure sp_CreateAuction   -- (Kevin)
 	@Title nvarchar(100),
 	@Description nvarchar(max),
 	@Price decimal(18,2),
@@ -158,7 +158,7 @@ END
 GO
 
 -- Search auctions                 -- Correct, Kevin
-create procedure sp_SearchAuctions  
+create procedure sp_SearchAuctions  --(Kevin)
 	@SearchTerm nvarchar (100)
 as
 begin
@@ -181,18 +181,38 @@ BEGIN
 END;
 GO
 
----- Alternative version kevin (Will perhaps use this later)
---create procedure sp_GetClosedAuctionDetails
---    @AuctionId int
---as
---begin
---    select 
---        a.*,
---        b.BidId,        -- The Bid ID of the winning bid
---        b.UserId,       -- The User ID of the winning bidder
---        b.BidPrice,     -- The price of the winning bid
---        b.BidTimeStamp  -- The Time stamp of the winning bid
-
+-- Alternative version kevin (Will perhaps use this later)
+create procedure sp_GetAuctionDetailsById --(kevin)
+    @AuctionId int
+as
+begin
+    select 
+        a.*,
+        b.BidId,        -- The Bid ID of the winning bid
+        b.UserId,       -- The User ID of the winning bidder
+        b.BidPrice,     -- The price of the winning bid
+        b.BidTimeStamp  -- The Time stamp of the winning bid
+    from
+        Auctions a
+    left join
+        (
+			select top 1
+				BidId,
+				UserId,
+				BidPrice,
+				BidTimeStamp,
+				AuctionId
+			from
+				Bids
+			where
+				AuctionId = @AuctionId
+			order by
+				BidPrice desc
+		) b on a.AuctionId = b.AuctionId
+	where
+		a.AuctionId = @AuctionId;      
+end;
+go
 
 -- --------------------
 

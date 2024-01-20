@@ -88,7 +88,7 @@ namespace Grupp3Auktionsajt.Api.Controllers
         }
 
 
-        [HttpGet("auction/{auctionId}")]
+        [HttpGet("auction/{auctionId}")]        // Probably not correct 100% correct
         [AllowAnonymous]
         public IActionResult GetBidsForAuction(int auctionId)
         {

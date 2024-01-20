@@ -3,6 +3,7 @@ using Grupp3Auktionsajt.Data.Interfaces;
 using Grupp3Auktionsajt.Domain.Models.DTO;
 using Grupp3Auktionsajt.Domain.Models.Entities;
 using Microsoft.Data.SqlClient;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -65,18 +66,57 @@ namespace Grupp3Auktionsajt.Data.Repos
 
        
 
-        public IEnumerable<Auction> SearchAuctions(string SearchTerm)
+        public IEnumerable<Auction> SearchAuctions(string SearchTerm) // (Kevin)
         {
             using (var db = _context.GetConnection())
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("SearchTerm", SearchTerm);
+                parameters.Add("@SearchTerm", SearchTerm);
 
                 return db.Query<Auction>("sp_SearchAuctions", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
-        public Auction GetBidById(int auctionId)
+        public Auction GetAuctionById(int auctionId)    // (Kevin) Perhaps will remove this later
+        {
+            using (var db = _context.GetConnection())
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@AuctionId", auctionId);
+
+                return db.Query<Auction>("sp_GetAuctionById", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+
+        public Auction GetAuctionDetailsById(int auctionId) // (Kevin) Shows details for an auction and together with a join with the highest bid
+        {
+            using (var db = _context.GetConnection())
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@AuctionId", auctionId);
+
+                var result = db.Query<Auction, Bid, Auction>(
+                    "sp_GetAuctionDetailsById",
+                    (auction, bid) =>
+                    {
+                        if (bid != null)
+                        {
+                            auction.Bids = new List<Bid> { bid };
+                        }
+                        return auction;
+                    },
+                    parameters,
+                    splitOn: "BidId",
+                    commandType: CommandType.StoredProcedure
+                )
+                .Distinct() // We only want to return one Auction object
+                .FirstOrDefault();
+
+                return result;
+            }
+        }
+
+        public Auction GetBidById(int auctionId) // This is in the wrong place
         {
             throw new NotImplementedException();
         }

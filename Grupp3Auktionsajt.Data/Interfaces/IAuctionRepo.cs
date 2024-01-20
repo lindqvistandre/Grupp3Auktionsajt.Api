@@ -17,6 +17,10 @@ namespace Grupp3Auktionsajt.Data.Interfaces
 
         IEnumerable<Auction> SearchAuctions(string SearchTerm);
 
-        Auction GetBidById(int auctionId);
+        Auction GetAuctionById(int auctionId);
+
+        Auction GetAuctionDetailsById(int auctionId);
+
+        Auction GetBidById(int auctionId); // This is at the wrong place
     }
 }

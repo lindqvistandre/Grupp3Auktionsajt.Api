@@ -43,9 +43,14 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo.CreateAuction(UserId, auctionDTO);
         }
 
-        public IEnumerable<Auction> SearchAuction(string keyword)
+        public IEnumerable<Auction> SearchAuction(string keyword) // (Kevin)
         {
             return _repo.SearchAuctions(keyword);
+        }
+
+        public Auction GetAuctionDetailsById(int auctionId) // (Kevin)
+        {
+            return _repo.GetAuctionDetailsById(auctionId);
         }
     }
 

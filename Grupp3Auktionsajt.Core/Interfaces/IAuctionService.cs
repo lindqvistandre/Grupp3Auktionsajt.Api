@@ -12,6 +12,7 @@ namespace Grupp3Auktionsajt.Core.Interfaces
     {
         bool DeleteAuction(int userId, int auctionId);
         void CreateAuction(int UserId, CreateAuctionDTO auctionDTO);
+        Auction GetAuctionDetailsById(int auctionId);
         IEnumerable<Auction> SearchAuction(string keyword);
     }
 }

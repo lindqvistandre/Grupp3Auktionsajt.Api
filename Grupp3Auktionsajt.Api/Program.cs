@@ -53,7 +53,9 @@ builder.Services.AddAuthentication(opt =>
 builder.Services.AddAutoMapper(
     typeof(Program).Assembly,
     typeof(GetBidsForAuctionProfile).Assembly,
-    typeof(SearchAuctionsProfile).Assembly);
+    typeof(SearchAuctionsProfile).Assembly,
+    typeof(GetAuctionProfile).Assembly
+    );
 
 
 var app = builder.Build();

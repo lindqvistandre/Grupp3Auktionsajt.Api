@@ -76,7 +76,7 @@ namespace Grupp3Auktionsajt.Api.Controllers
 
         [HttpGet("Search")]
         [AllowAnonymous]
-        public IActionResult SearchAuction([FromQuery] string keyword)
+        public IActionResult SearchAuction([FromQuery] string keyword) // (Kevin)
         {
             try
             {
@@ -84,14 +84,42 @@ namespace Grupp3Auktionsajt.Api.Controllers
                 var auctions = _service.SearchAuction(keyword);
 
                 // Map the entities to DTOs
-                var SearchAuctionDTOs = _mapper.Map<IEnumerable<SearchAuctionDTO>>(auctions);
+                var searchAuctionDTOs = _mapper.Map<IEnumerable<SearchAuctionDTO>>(auctions);
                 
-                return Ok(SearchAuctionDTOs);
+                return Ok(searchAuctionDTOs);
 
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error couldn't search auctions");
+            }
+        }
+
+        // GetAuctionDetails
+        [HttpGet("{auctionId}")]
+        public IActionResult GetAuctionDetails(int auctionId) // (Kevin)
+        {
+            try
+            {
+                // try get the auction
+                var auction = _service.GetAuctionDetailsById(auctionId);
+
+                // Map the entity to DTO
+                var auctionDto = _mapper.Map<GetAuctionDTO>(auction);
+
+                if (auctionDto != null)
+                {
+                    return Ok(auctionDto);
+                }
+                else
+                {
+                    return NotFound("Auction could not be found");
+                }
+ 
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error couldn't get auction");
             }
         }
     }
