@@ -69,12 +69,12 @@ GO
 
 -- Det går även att ångra dvs ta bort ett bud om auktionen inte är avslutad.
 
-Create procedure sp_DeleteBid(@DeleteByID int)      -- Correct, Kevin
+Create procedure sp_DeleteBid(@BidId int)      -- Correct, Kevin
 As
 Begin
 Delete 
 From Bids
-Where BidId = @DeleteByID
+Where BidId = @BidId
 End;
 GO
 

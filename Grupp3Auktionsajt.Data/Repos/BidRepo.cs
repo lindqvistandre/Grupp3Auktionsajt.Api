@@ -63,9 +63,9 @@ namespace Grupp3Auktionsajt.Data.Repos
             using (var db = _context.GetConnection())
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@BidID", bidID);
+                parameters.Add("@BidId", bidID);
 
-                db.Execute("sp.DeleteBid", parameters, commandType: CommandType.StoredProcedure);
+                db.Execute("sp_DeleteBid", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 

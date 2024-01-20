@@ -26,9 +26,9 @@ namespace Grupp3Auktionsajt.Api.Controllers
         }
 
 
-        [HttpPost("{bidId}")]
+        [HttpDelete("delete/{bidId}")]
         [Authorize(Roles = "User")]
-        public IActionResult DeleteBid(int bidId)           // Liknar hur ni ska göra i "DeleteAuction"     // DeleteBid men har inte fixat service metoden för den än
+        public IActionResult DeleteBid(int bidId)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace Grupp3Auktionsajt.Api.Controllers
         }
 
 
-        [HttpGet("auction/{auctionId}")]        // Probably not correct 100% correct
+        [HttpGet("auction/{auctionId}")]        // Check BidService for more information
         [AllowAnonymous]
         public IActionResult GetBidsForAuction(int auctionId)
         {
