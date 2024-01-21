@@ -20,7 +20,7 @@ namespace Grupp3Auktionsajt.Core.Services
             _repo = repo;
         }
 
-        public bool CreateUser(string username, string password)
+        public bool CreateUser(string username, string password)    // Correct
         {
 
             // Get user by Username from the database through a _repo nethod and save it in a variable
@@ -38,7 +38,7 @@ namespace Grupp3Auktionsajt.Core.Services
             }
         }
 
-        public bool UpdateUser(int userId, string username, string Password)        // Correct
+        public bool UpdateUser(int userId, string username, string Password)      // Needs to be updated
         {
             // Get the user by Username from the database through a _repo method
             var existingUser = _repo.GetUserByUsername(username);
