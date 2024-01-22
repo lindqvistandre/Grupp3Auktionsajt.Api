@@ -91,5 +91,4 @@ namespace Grupp3Auktionsajt.Core.Services
     }
 }
 
-// Method for signing in
 

@@ -69,13 +69,6 @@ namespace Grupp3Auktionsajt.Data.Repos
             }
         }
 
-        public Auction GetAuctionById(int auctionId)    // Seems to be in the wrong place
-        {
-            using (var db = _context.GetConnection())
-            {
-                return db.QueryFirstOrDefault<Auction>("sp_GetAuctionById", new { AuctionId = auctionId }, commandType: CommandType.StoredProcedure);
-            }
-        }
 
         public Bid GetHighestBidForAuction(int auctionId)
         {

@@ -115,10 +115,5 @@ namespace Grupp3Auktionsajt.Data.Repos
                 return result;
             }
         }
-
-        //public Auction GetBidById(int auctionId) // This is in the wrong place
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

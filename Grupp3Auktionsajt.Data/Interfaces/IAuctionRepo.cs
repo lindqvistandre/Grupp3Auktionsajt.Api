@@ -21,6 +21,6 @@ namespace Grupp3Auktionsajt.Data.Interfaces
 
         Auction GetAuctionDetailsById(int auctionId);
 
-        //Auction GetBidById(int auctionId); // This is at the wrong place
+       
     }
 }
