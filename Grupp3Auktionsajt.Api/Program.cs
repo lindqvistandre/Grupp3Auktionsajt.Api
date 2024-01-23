@@ -4,7 +4,6 @@ using System.Text;
 using Grupp3Auktionsajt.Data;
 using Grupp3Auktionsajt.Data.Interfaces;
 using Grupp3Auktionsajt.Data.Repos;
-//using Grupp3Auktionsajt.Domain.Models.DTO;
 using Grupp3Auktionsajt.Domain.Models.Entities;
 using Microsoft.AspNetCore.SignalR;
 using AutoMapper;
@@ -17,6 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseUrls("http://localhost:5265");
 
 builder.Services.AddControllers();
+builder.Services.AddSwaggerGen(); // Added Swagger
 builder.Services.AddSingleton<IDBContext, DBContext>();
 builder.Services.AddScoped<IAuctionService, AuctionService>();
 builder.Services.AddScoped<IAuctionRepo, AuctionRepo>();
@@ -62,5 +62,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.Run();

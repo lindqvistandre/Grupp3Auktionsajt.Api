@@ -38,13 +38,37 @@ namespace Grupp3Auktionsajt.Core.Services
             }
         }
 
-        public bool UpdateUser(int userId, string username, string Password)      // Needs to be updated
+        //public bool UpdateUser(int userId, string username, string Password)      // Needs to be updated
+        //{
+        //    // Get the user by Username from the database through a _repo method
+        //    var existingUser = _repo.GetUserByUsername(username);
+
+        //    // Check if the user exists
+        //    if (existingUser != null)
+        //    {
+        //        // Update the user's information (You can update one or multiple properties of the user object)
+        //        _repo.UpdateUser(userId, username, Password);
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+
+        public bool UpdateUser(int userId, string username, string Password)        // Correct
         {
-            // Get the user by Username from the database through a _repo method
+            if (username == null)
+            {
+                // Update the user's information (You can update one or multiple properties of the user object)
+                _repo.UpdateUser(userId, username, Password);
+                return true;
+            }
+
+            // Check if there's already a user with the same Username in the database (make sure that the new username is unique)
             var existingUser = _repo.GetUserByUsername(username);
 
-            // Check if the user exists
-            if (existingUser != null)
+            if (existingUser == null)
             {
                 // Update the user's information (You can update one or multiple properties of the user object)
                 _repo.UpdateUser(userId, username, Password);
