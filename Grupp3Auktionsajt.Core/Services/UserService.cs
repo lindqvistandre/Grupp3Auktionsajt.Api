@@ -56,7 +56,7 @@ namespace Grupp3Auktionsajt.Core.Services
         //    }
         //}
 
-        public bool UpdateUser(int userId, string username, string Password)        // Correct
+        public bool UpdateUser(int userId, string username, string Password)
         {
             if (username == null)
             {
@@ -79,6 +79,7 @@ namespace Grupp3Auktionsajt.Core.Services
                 return false;
             }
         }
+
 
         public void DeleteUser(int userId)      // Correct
         {
