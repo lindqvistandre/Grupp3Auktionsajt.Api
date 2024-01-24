@@ -35,6 +35,16 @@ namespace Grupp3Auktionsajt.Core.Services
             // 1. Call a stored procedure to get the bid based on BidId
             var bid = _repo.GetBidById(bidId);
 
+            int auctionId = bid.AuctionId;
+
+            // Auction object
+            var auction = _auctionRepo.GetAuctionById(auctionId);
+
+            if(DateTime.Now > auction.EndDate)
+            {
+                return false;
+            }
+
             // 2. Check if the userId of the user who tries to delete the bid matches the userId of the one who made the bid
             if (bid != null && bid.UserId == userId)
             {
