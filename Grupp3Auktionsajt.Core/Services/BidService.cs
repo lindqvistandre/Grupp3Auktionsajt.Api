@@ -86,32 +86,32 @@ namespace Grupp3Auktionsajt.Core.Services
         // This method is mostly correct. The issue is that the method "GetAuctionById" is found in the Bid Repository.
         // The Bid repository should only contain methods related to getting, creating, updating and deleting bids.
         // It should not contain a method to retrieve an auction. Read the comments above that I wrote on the DeleteBid method for more information, Kevin
-        //public int CreateBid(int userId, CreateBidDto createBidDto) 
-        //{
-        //    var auction = _repo.GetAuctionById(createBidDto.AuctionId);
-        //    if (auction == null || auction.EndDate <= DateTime.Now)
-        //    {
-        //        return 1;
-        //    }
+        public int CreateBid(int userId, CreateBidDto createBidDto)
+        {
+            var auction = _auctionRepo.GetAuctionById(createBidDto.AuctionId);
+            if (auction == null || auction.EndDate <= DateTime.Now)
+            {
+                return 1;
+            }
 
-        //    // Checking if auction isnt created by user.
-        //    if (auction.CreatorUserId == userId)
-        //    {
-        //        return 2;
-        //    }
+            // Checking if auction isnt created by user.
+            if (auction.CreatorUserId == userId)
+            {
+                return 2;
+            }
 
-        //    // Check if bid is higher then new one.
-        //    var highestBid = _repo.GetHighestBidForAuction(createBidDto.AuctionId);
-        //    if (highestBid != null && createBidDto.BidPrice <= highestBid.BidPrice)
-        //    {
-        //        return 3;
-        //    }
+            // Check if bid is higher then new one.
+            var highestBid = _repo.GetHighestBidForAuction(createBidDto.AuctionId);
+            if (highestBid != null && createBidDto.BidPrice <= highestBid.BidPrice)
+            {
+                return 3;
+            }
 
-        //    // Create the bid
-        //    _repo.CreateBid(userId, createBidDto);
-        //    return 0;
-            
-        //}
+            // Create the bid
+            _repo.CreateBid(userId, createBidDto);
+            return 0;
+
+        }
 
     }
 }

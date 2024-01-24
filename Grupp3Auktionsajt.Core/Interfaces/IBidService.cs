@@ -12,7 +12,7 @@ namespace Grupp3Auktionsajt.Core.Interfaces
     {
         bool DeleteBid(int userId, int bidId);
 
-        //int CreateBid(int userId, CreateBidDto createBidDto);
+        int CreateBid(int userId, CreateBidDto createBidDto);
 
         List<Bid> GetBidsForAuction(int auctionId);
     }

@@ -55,37 +55,37 @@ namespace Grupp3Auktionsajt.Api.Controllers
         }
 
 
-        //[HttpPost]
-        //[Authorize(Roles = "User")]
-        //public IActionResult CreateBid([FromBody] CreateBidDto createBidDto) // Correct
-        //{
-        //    try
-        //    {
-        //        // Get user ID from claims
-        //        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        [HttpPost]
+        [Authorize(Roles = "User")]
+        public IActionResult CreateBid([FromBody] CreateBidDto createBidDto) // Correct
+        {
+            try
+            {
+                // Get user ID from claims
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
-        //        var createBid = _service.CreateBid(userId, createBidDto);
-                
-        //        if(createBid == 0)
-        //            return Ok("Successfully created the bid");
+                var createBid = _service.CreateBid(userId, createBidDto);
 
-        //        else if (createBid == 1)
-        //            return BadRequest("Auction isn't open anymore for bids");
+                if (createBid == 0)
+                    return Ok("Successfully created the bid");
 
-        //        else if (createBid == 2)
-        //            return BadRequest("You cant bid on your own auction.");
+                else if (createBid == 1)
+                    return BadRequest("Auction isn't open anymore for bids");
 
-        //        else if (createBid == 3)
-        //            return BadRequest("Bid must be higher then previous bid.");
-        //        else
-        //            return BadRequest("Couldn't create the bid");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, "Error creating a new bid");
-        //        return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the bid");
-        //    }
-        //}
+                else if (createBid == 2)
+                    return BadRequest("You cant bid on your own auction.");
+
+                else if (createBid == 3)
+                    return BadRequest("Bid must be higher then previous bid.");
+                else
+                    return BadRequest("Couldn't create the bid");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error creating a new bid");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the bid");
+            }
+        }
 
 
         [HttpGet("auction/{auctionId}")]        // Check BidService for more information
