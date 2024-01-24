@@ -14,29 +14,31 @@ namespace Grupp3Auktionsajt.Core.Services
     public class AuctionService : IAuctionService
     {
         private readonly IAuctionRepo _repo;
+        private readonly IBidRepo _bidRepo;
 
-        public AuctionService(IAuctionRepo repo)
+        public AuctionService(IAuctionRepo repo, IBidRepo bidRepo)
         {
             _repo = repo;
+            _bidRepo = bidRepo;
         }
 
-        //public bool DeleteAuction(int userId, int auctionId)
-        //{
-        //    var auction = _repo.GetBidById(auctionId);
+        public bool DeleteAuction(int userId, int auctionId)
+        {
+            var auction = _repo.GetAuctionById(auctionId);
+            var bids = _bidRepo.GetBidsForAuction(auctionId);
 
-            
-        //    if (auction != null && auction.CreatorUserId == userId)
-        //    {
-        //        // Proceed with deleting the bid if the user is the owner
-        //        _repo.DeleteAuction(auctionId);
+            if (bids == null && auction.CreatorUserId == userId)
+            {
+                // Proceed with deleting the bid if the user is the owner
+                _repo.DeleteAuction(auctionId);
 
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    } 
-        //}
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public void CreateAuction(int UserId, CreateAuctionDTO auctionDTO) // Correct
         {
