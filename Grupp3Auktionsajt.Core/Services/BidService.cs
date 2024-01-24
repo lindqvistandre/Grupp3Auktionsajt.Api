@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,7 +62,17 @@ namespace Grupp3Auktionsajt.Core.Services
 
         public List<Bid> GetBidsForAuction(int auctionId) // You need to check if the auction is still open. If it's closed you should hinder the user from getting the bids. You can read the comments above for more ideas, Kevin
         {
+            
+            // Auction object
+            var auction = _auctionRepo.GetAuctionById(auctionId);
+
+            if (DateTime.Now > auction.EndDate)
+            {
+                return null;
+            }
+
             return _repo.GetBidsForAuction(auctionId);
+
         }
 
 

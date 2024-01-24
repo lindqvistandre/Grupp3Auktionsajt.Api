@@ -94,9 +94,17 @@ namespace Grupp3Auktionsajt.Api.Controllers
         {
             try
             {
+
                 var bids = _service.GetBidsForAuction(auctionId);
-                var bidDtos = _mapper.Map<List<BidDTO>>(bids);
-                return Ok(bidDtos);
+                if (bids != null)
+                {
+                    var bidDtos = _mapper.Map<List<BidDTO>>(bids);
+                    return Ok(bidDtos);
+                }
+                else
+                {
+                    return BadRequest("Auction are closed");
+                }
             }
             catch (Exception ex)
             {
