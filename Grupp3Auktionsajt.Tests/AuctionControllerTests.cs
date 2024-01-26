@@ -78,5 +78,29 @@ namespace Grupp3Auktionsajt.Tests
             Assert.AreEqual(((ObjectResult)result).StatusCode, StatusCodes.Status201Created);
         }
 
+        [TestMethod]
+        public void CreateAuction_ServiceException_ReturnsInternalServerError()
+        {
+            // Arrange
+            var auctionDto = new CreateAuctionDTO
+            {
+                Title = "Test",
+                Description = "Test",
+                Price = 1,
+                Days = 1
+            };
+
+            // Mock the IAuctionService method called CreateAuction
+            _auctionServiceMock.Setup(service => service.CreateAuction(It.IsAny<int>(), It.IsAny<CreateAuctionDTO>()))
+                                .Throws(new Exception("I missed the part where that's my problem"));
+
+            // Act
+            var result = _auctionController.CreateAuction(auctionDto);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(ObjectResult));
+            Assert.AreEqual(((ObjectResult)result).StatusCode, 500);
+        }
+
     }
 }
