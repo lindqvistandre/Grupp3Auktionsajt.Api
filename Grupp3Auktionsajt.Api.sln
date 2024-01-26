@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		skapa tabeller.sql = skapa tabeller.sql
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grupp3Auktionsajt.Tests", "Grupp3Auktionsajt.Tests\Grupp3Auktionsajt.Tests.csproj", "{FAF80063-3230-4DBF-9A9D-D916884E0B82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{C0D716A8-B3A6-4F6A-9E99-27E1396DA229}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0D716A8-B3A6-4F6A-9E99-27E1396DA229}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0D716A8-B3A6-4F6A-9E99-27E1396DA229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAF80063-3230-4DBF-9A9D-D916884E0B82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAF80063-3230-4DBF-9A9D-D916884E0B82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAF80063-3230-4DBF-9A9D-D916884E0B82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAF80063-3230-4DBF-9A9D-D916884E0B82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
