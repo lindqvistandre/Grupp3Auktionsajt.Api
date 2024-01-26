@@ -16,7 +16,7 @@ namespace Grupp3Auktionsajt.Tests
     public class AuctionControllerTests
     {
         private Mock<IAuctionService> _auctionServiceMock;
-        private Mock<IMapper> _mapperMock; // If someone manages to mock Mapper
+        //private Mock<IMapper> _mapperMock; // If someone manages to mock Mapper
         private AuctionController _auctionController;
 
         [TestInitialize]
@@ -92,7 +92,7 @@ namespace Grupp3Auktionsajt.Tests
 
             // Mock the IAuctionService method called CreateAuction
             _auctionServiceMock.Setup(service => service.CreateAuction(It.IsAny<int>(), It.IsAny<CreateAuctionDTO>()))
-                                .Throws(new Exception("I missed the part where that's my problem"));
+                               .Throws(new Exception("I missed the part where that's my problem"));
 
             // Act
             var result = _auctionController.CreateAuction(auctionDto);
@@ -102,5 +102,23 @@ namespace Grupp3Auktionsajt.Tests
             Assert.AreEqual(((ObjectResult)result).StatusCode, 500);
         }
 
+        [TestMethod]
+        public void DeleteAuction_InvalidData_ReturnsBadRequest()
+        {
+            // Arrange
+            // Invalid auctionId
+            var auctionId = 1;
+
+            // Mock the IAuctionService method called DeleteAuction
+            _auctionServiceMock.Setup(service => service.DeleteAuction(It.IsAny<int>(), It.IsAny<int>()))
+                               .Returns(false);
+
+            // Act
+            var result = _auctionController.DeleteAuction(auctionId);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            Assert.AreEqual(((BadRequestObjectResult)result).StatusCode, StatusCodes.Status400BadRequest);
+        }
     }
 }
