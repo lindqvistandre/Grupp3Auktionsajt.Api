@@ -25,7 +25,7 @@ namespace Grupp3Auktionsajt.Api.Controllers
         }
 
 
-        [HttpPost("{auctionId}")]
+        [HttpDelete("{auctionId}")]
         [Authorize(Roles = "User")]
         public IActionResult DeleteAuction(int auctionId)         // Will test this later in postman
         {

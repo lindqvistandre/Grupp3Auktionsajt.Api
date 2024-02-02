@@ -27,7 +27,7 @@ namespace Grupp3Auktionsajt.Core.Services
             var auction = _repo.GetAuctionById(auctionId);
             var bids = _bidRepo.GetBidsForAuction(auctionId);
 
-            if (bids == null && auction.CreatorUserId == userId)
+            if (bids.Count == 0 && auction.CreatorUserId == userId)
             {
                 // Proceed with deleting the bid if the user is the owner
                 _repo.DeleteAuction(auctionId);
